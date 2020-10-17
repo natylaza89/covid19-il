@@ -4,10 +4,13 @@ from covid19_il.api_handler.api_factory.api_factory import ApiFactory
 from covid19_il.api_handler.api.api_data_il import ApiDataIL
 from covid19_il.api_handler.api_factory.api_enum import ApiEnum
 
+
 class TestApiFactory(unittest.TestCase):
     """ API Factory for creating Types of API Clients.
 
     Methods:
+        def setUp(self): announce of starting the class's tests and initialize api's instances
+        def tearDown(self): announce of finishing the class's tests
         def test_create_api_client(self): test api's class instance creation and lru_cache's behaviour as "singleton".
 
     """
