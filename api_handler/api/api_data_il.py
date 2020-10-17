@@ -15,7 +15,7 @@ class ApiDataIL(IAPIHandler):
 
     Attributes:
         _logger(Logger.logger): Api Data IL instance's actions logger.
-        _url_base(str): url base of Israel Data gov API.
+        _base_url(str): base url of Israel Data gov API.
         _url_query(str): final url query for http get request
         _json_data(dict): http get request's results dictionary
         _request_status(int): http get request's results status
@@ -28,7 +28,7 @@ class ApiDataIL(IAPIHandler):
     def __init__(self, logger) -> None:
         load_dotenv()
         self._logger = logger
-        self._url_base = os.getenv("API_DATA_GOV_IL_URL")
+        self._base_url = os.getenv("API_DATA_GOV_IL_URL")
         self._url_query = None
         self._json_data = None
         self._request_status = None
@@ -40,12 +40,17 @@ class ApiDataIL(IAPIHandler):
 
     def __bool__(self) -> bool:
         """ Returns Class Truth Value """
-        return self._url_base is not None and len(self._url_base) == 19
+        return self._base_url is not None and len(self._base_url) == 19
 
     @property
     def logger(self) -> Logger.logger:
         """ Logger.logger: Returns an instance of a logger """
         return self._logger
+
+    @property
+    def base_url(self) -> str:
+        """ str: api's base url """
+        return self._base_url
 
     @property
     def url_query(self) -> str:
@@ -129,7 +134,7 @@ class ApiDataIL(IAPIHandler):
             None.
         """
 
-        self._url_query = f"{self._url_base}/api/3/action/datastore_search?" \
+        self._url_query = f"{self._base_url}/api/3/action/datastore_search?" \
                           f"resource_id={os.getenv(enum_resource_id.name)}"
         if limit:
             self._url_query += f"&limit={limit}"
