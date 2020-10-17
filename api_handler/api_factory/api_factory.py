@@ -31,6 +31,8 @@ class ApiFactory:
             IAPIHandler or None: api's class instance or None object.
 
         """
+        if not isinstance(required_api, ApiEnum):
+            raise TypeError("Not Api Enum Type")
 
         switch_case = {
             1: ApiDataIL(Logger().logger),
