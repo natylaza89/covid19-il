@@ -83,7 +83,7 @@ class ApiDataIL(IAPIHandler):
     @property
     def request_status(self) -> str:
         """ int: Returns an integer of http get request's results status. """
-        return self.request_status
+        return self._request_status
 
     def _get_request(self) -> int:
         """ Get request implementation - get request from IL Data Gov, save Data and return request's status code.
