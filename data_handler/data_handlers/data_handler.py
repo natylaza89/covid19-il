@@ -141,7 +141,7 @@ class DataHandler(ABC):
             string(str): given string for parsing.
 
         Returns:
-            string(str): cleaned & ready to use stirng.
+            string(str): cleaned & ready to use string.
 
         """
 
@@ -189,7 +189,7 @@ class DataHandler(ABC):
         finally:
             return data_dict
 
-    def _get_data_by_columns(self, columns_names: Tuple[AnyStr], grouped_by_column: str) -> \
+    def _get_data_by_columns(self, columns_names: Tuple, grouped_by_column: str) -> \
             DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]]:
         """ Returns data by given some amount of columns of data frame.
 
@@ -227,10 +227,11 @@ class DataHandler(ABC):
         Note:
             private method which get called other methods for data manipulation by columns.
         Args:
-            columns_names(Tuple): given required df's coljmns names as a tuple.
+            columns_names(Tuple): given required df's columns names as a tuple.
 
         Returns:
             data_dict(Dict[str, Dict[str, int or float]]): desired data.
+            :rtype: object
 
         """
         data_dict = None
