@@ -16,6 +16,10 @@ class Cities(DataHandler):
     Methods:
         cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): return calculated dictionary of
             city_name: namedtuple with city's data props via given date
+        _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]): Helper Method of other class's method for
+            calculation.
+        top_10_cases_in_cities(self): returns top 10 cities with 5 calculated properties.
+        cases_statistics(self): returns cases statistics.
 
     """
 
