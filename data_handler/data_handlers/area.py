@@ -1,7 +1,7 @@
 from random import randint
 import json
-from typing import Dict, List
 from functools import lru_cache
+from typing import Dict, List
 
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
 from covid19_il.logger.logger import Logger
@@ -9,7 +9,7 @@ from covid19_il.data_handler.enums.area_event import AreaEvent
 
 
 class Area(DataHandler):
-    """ API Client for Israeli Government Covid19 Data.
+    """ Covid19_IL Area Data Handler.
 
     Attributes:
         None.
