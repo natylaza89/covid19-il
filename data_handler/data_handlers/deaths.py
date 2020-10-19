@@ -13,8 +13,13 @@ class Deaths(DataHandler):
         None.
 
     Methods:
-        cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): return calculated dictionary of
-            city_name: namedtuple with city's data props via given date
+        _get_data_by_column(self, group_by_column: str, ascending_order: bool = False): return amount of given column.
+        amount_of_deaths(self): Return amount of deaths in  data holder.
+        amount_of_ventilated(self): returns amount of ventilated/unventilated by age group & gender.
+        time_between_positive_and_hospitalization(self): returns amount of time between positive and hospitalization
+            by age group & gender.
+        length_of_hospitalization(self): returns length of hospitalization's amount by age group & gender.
+        time_between_positive_and_death(self): returns time between positive and death amount by age group & gender.
 
     TODO
         1. can be added global min, max, mean/average
