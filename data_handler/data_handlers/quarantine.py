@@ -6,7 +6,7 @@ from covid19_il.data_handler.data_handlers.data_handler import DataHandler
 
 
 class Quarantine(DataHandler):
-    """ Covid19_IL Deaths Data Handler.
+    """ Covid19_IL Quarantine Data Handler.
 
     Attributes:
         None.
