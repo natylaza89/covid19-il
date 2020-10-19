@@ -61,7 +61,7 @@ class Area(DataHandler):
             return data_dict
 
     def _string_parser(self, str_key: str) -> List[str]:
-        """ Parse & Clean string from unnecessary chars for better presentation
+        """ Parse & Clean string from unnecessary chars for better presentation.
 
         Note:
             Overridden Method: private method which get called by get_data_by_event_type's method.
@@ -79,14 +79,14 @@ class Area(DataHandler):
                                   ord("'"): None})\
                       .split(", ")
 
-    def _get_data_by_column(self, column_name: str, ascending_order: bool = True) -> Dict:
+    def _get_data_by_column(self, group_by_column: str, ascending_order: bool = True) -> Dict:
         """ Returns a Dictionary of Top Total Amount of given column name via DataFrame Data.
 
         Note:
             Overridden Method: private method which get called by the other methods by given event type.
 
         Args:
-            column_name(str): column name of event type.
+            group_by_column(str): column name of event type.
             ascending_order(bool): final result's ordering by de/ascending.
 
         Returns:
@@ -98,10 +98,10 @@ class Area(DataHandler):
         try:
             df = self._get_clean_copy_df_data()
             # data which is under 15, replace it with a random number
-            df[column_name] = df[column_name].apply(
+            df[group_by_column] = df[group_by_column].apply(
                 lambda input_string: int(input_string) if input_string != '<15' else randint(0, 15))
-            df = df[['town', column_name]]
-            ser_group_by = df.groupby('town')[column_name].unique()
+            df = df[['town', group_by_column]]
+            ser_group_by = df.groupby('town')[group_by_column].unique()
             ser = ser_group_by.apply(lambda item: sum(item))
             ser = ser.sort_values(ascending=ascending_order)
             data_dict = {key: value for key, value in ser.items()}
