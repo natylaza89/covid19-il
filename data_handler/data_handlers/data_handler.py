@@ -1,7 +1,8 @@
 from abc import ABC
 from random import randint
-import pandas as pd
+import math
 from collections import defaultdict
+import pandas as pd
 from typing import Dict, DefaultDict, Tuple, AnyStr
 
 from covid19_il.logger.logger import Logger
@@ -161,7 +162,8 @@ class DataHandler(ABC):
 
         """
 
-        return randint(1, 15) if input_string == "<15" else int(input_string)
+        return randint(1, 15) if (input_string == "<15" or "NULL" or math.isnan(float(input_string))) \
+            else int(input_string)
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) -> Dict:
         """ Returns a dictionary of top total amount of given column name via data frame.
