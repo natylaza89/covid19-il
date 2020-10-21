@@ -18,7 +18,7 @@ class TestDataHandlerFactory(unittest.TestCase):
 
     def setUp(self) -> None:
         """ Announce of starting the class's tests and initialize api's instances """
-        print("testing ApiFactory Class...")
+        print("testing DataHandlerFactory Class...")
         mocked_json_data = {"result": {"records": {}}}
         self.data_handler_1 = DataHandlerFactory.get_instance(ResourceId.AREA_RESOURCE_ID, mocked_json_data)
         self.data_handler_2 = DataHandlerFactory.get_instance(ResourceId.AREA_RESOURCE_ID, mocked_json_data)
@@ -26,7 +26,7 @@ class TestDataHandlerFactory(unittest.TestCase):
 
     def tearDown(self) -> None:
         """ Announce of finishing the class's tests """
-        print("finished testing ApiFactory Class...")
+        print("finished testing DataHandlerFactory Class...")
 
     def test_get_instance(self) -> None:
         """ Test API's class instance creation and lru_cache's behaviour as "singleton". """
