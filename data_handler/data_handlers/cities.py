@@ -32,7 +32,7 @@ class Cities(DataHandler):
         super().__init__(logger, json_data)
 
     @lru_cache(maxsize=None)
-    def cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")) -> Dict[str, NamedTuple]:
+    def cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")) -> DefaultDict[str, NamedTuple]:
         """ Return calculated dictionary of city_name: namedtuple with city's data props via given date in format
             like: '2020-10-03'.
 
@@ -58,8 +58,6 @@ class Cities(DataHandler):
 
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-            # TODO: check in tests if exception raise
-            raise
         finally:
             return data_dict
 
@@ -88,19 +86,18 @@ class Cities(DataHandler):
             for field in cities_fields:
                 temp_df = df[["Date", "City_Name", field]]
                 temp_df = temp_df.sort_values(['Date', field], ascending=False).head(10)
+
                 for item in temp_df.values:
                     # item[1]: city, item[2]: amount
                     data_dict[field][item[1]] = item[2]
 
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-            # TODO: check in tests if exception raise
-            raise
         finally:
             return data_dict
 
     @lru_cache
-    def top_10_cases_in_cities(self) -> DefaultDict[str, DefaultDict[str, int]]:
+    def top_cases_in_cities(self) -> DefaultDict[str, DefaultDict[str, int]]:
         """ Returns top 10 cities with 5 calculated properties.
 
         Args:
