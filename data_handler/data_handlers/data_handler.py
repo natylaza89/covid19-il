@@ -1,5 +1,5 @@
 from abc import ABC
-from random import randint
+from random import randint, seed
 import math
 from collections import defaultdict
 import pandas as pd
@@ -73,7 +73,7 @@ class DataHandler(ABC):
             self._df = input_df
         else:
             self._logger.exception(f"the input value: {input_df} isn't pandas data frame")
-            raise TypeError(f"the input value: {input_df} isn't pandas data frame")\
+            raise TypeError(f"the input value: {input_df} isn't pandas data frame")
 
     @property
     def total_number(self) -> int:
@@ -108,8 +108,6 @@ class DataHandler(ABC):
         Returns:
             df_data(DataFrame or none): converted json data to pandas data frame.
 
-        Raises:
-            TypeError: concrete error which can occurred if dict can't be access by given key.
         """
 
         df_data = None
@@ -117,8 +115,6 @@ class DataHandler(ABC):
             df_data = pd.json_normalize(data=self._main_data["result"]["records"])
         except TypeError as te:
             self.logger.exception(te)
-            # TODO: check if the exception get raised in tests. then change the docs if it returns None or not
-            raise
         finally:
             return df_data
 
@@ -169,9 +165,10 @@ class DataHandler(ABC):
             _(int): integer value.
 
         """
-
-        return randint(1, 15) if (input_string == "<15" or "NULL" or math.isnan(float(input_string))) \
-            else int(input_string)
+        seed(0)
+        return randint(1, 15) if (input_string == "<15" or
+                                  input_string == "NULL" or
+                                  input_string == math.isnan(float(input_string))) else int(input_string)
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) -> Dict:
         """ Returns a dictionary of top total amount of given column name via data frame.
@@ -226,8 +223,6 @@ class DataHandler(ABC):
 
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-            # TODO: check if raise exception in tests...
-            raise
         finally:
             return data_dict
 
@@ -260,8 +255,6 @@ class DataHandler(ABC):
 
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-            # TODO: check if raise exception in tests...
-            raise
         finally:
             return data_dict
 
