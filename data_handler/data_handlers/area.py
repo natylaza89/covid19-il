@@ -1,4 +1,3 @@
-from random import randint
 import json
 from functools import lru_cache
 from typing import Dict, List
@@ -34,7 +33,7 @@ class Area(DataHandler):
         super().__init__(logger, json_data)
 
     def get_data_by_event_type(self, event_type: AreaEvent) -> Dict or None:
-        """ Get data of new events by town agas code.
+        """ Get data of new events organized by town agas code.
 
         Args:
             event_type(AreaEvent): event type(enum) which determined which data to get returns.
@@ -49,16 +48,30 @@ class Area(DataHandler):
         data_dict = None
         try:
             df = self._get_clean_copy_df_data()
+            df['agas_code'] = [self._convert_string_to_int(item) for item in df['agas_code']]
             df = df[['town', 'agas_code', event_type.name.lower()]]
             ser_group_by = df.groupby(['town', 'agas_code'])[event_type.name.lower()]
             data_dict = json.loads(ser_group_by.unique().to_json())
             data_dict = {tuple(self._string_parser(key)): value[0] for key, value in data_dict.items()}
         except KeyError as ke:
             self._logger.exception(ke)
-            # TODO: need to check in the tests if it get raised.
-            raise
         finally:
             return data_dict
+
+    def _convert_string_to_int(self, input_string: str) -> int:
+        """ Parsing string to int.
+
+        Note:
+            private method which get called other methods when a string need to be converted to int before computation.
+
+        Args:
+            input_string(str): given string for conversion.
+
+        Returns:
+            _(int): 0 to flag it as unknown area.
+
+        """
+        return 0 if input_string is None else input_string
 
     def _string_parser(self, str_key: str) -> List[str]:
         """ Parse & Clean string from unnecessary chars for better presentation.
@@ -99,7 +112,7 @@ class Area(DataHandler):
             df = self._get_clean_copy_df_data()
             # data which is under 15, replace it with a random number
             df[group_by_column] = df[group_by_column].apply(
-                lambda input_string: int(input_string) if input_string != '<15' else randint(0, 15))
+                lambda input_string: int(input_string) if input_string != '<15' else 0)#randint(0, 15))
             df = df[['town', group_by_column]]
             ser_group_by = df.groupby('town')[group_by_column].unique()
             ser = ser_group_by.apply(lambda item: sum(item))
