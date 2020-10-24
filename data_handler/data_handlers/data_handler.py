@@ -67,6 +67,14 @@ class DataHandler(ABC):
         """ DataFrame: Returns the actual data as pandas data frame """
         return self._df
 
+    @df.setter
+    def df(self, input_df) -> None:
+        if isinstance(input_df, pd.DataFrame):
+            self._df = input_df
+        else:
+            self._logger.exception(f"the input value: {input_df} isn't pandas data frame")
+            raise TypeError(f"the input value: {input_df} isn't pandas data frame")\
+
     @property
     def total_number(self) -> int:
         """ int: Returns the total number up to the http get request's query if key exist in the dictionary.
