@@ -1,41 +1,28 @@
-import unittest
-import json
 from collections import defaultdict
 from numpy import int64 as numpy_int64, float64 as numpy_float64
 
-from covid19_il.data_handler.data_handlers_factory.data_handler_factory import DataHandlerFactory
+from covid19_il.tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
 from covid19_il.data_handler.data_handlers.cities import Cities
 from covid19_il.data_handler.enums.resource_id import ResourceId
 
 
-class TestCities(unittest.TestCase):
-    """ Data Handler Factory for creating Types of resource data handlers.
+class TestCities(DataHandlerTestsUtils):
+    """ Tests for Cities Data Handler Class.
 
     Methods:
-        def setUp(self): Announce of starting the class's tests, initialize & verify cities data handler's instance.
-        def tearDown(self): announce of finishing the class's tests
+        setUp(self): Announce of starting the class's tests, initialize & verify cities data handler's instance.
+        _check_base_step_of_all_methods(self): General base test for all methods.
+        test_cities_by_date(self): Tests results of tests cities by specific date and its results as city's tuples.
+        test_cases_statistics(self): Tests the test cases statistics data & type.
 
     """
 
     def setUp(self) -> None:
         """ Announce of starting the class's tests, initialize & verify Cities data handler's instance """
         print("testing Cities Class...")
-        with open("json_files/cities_mocked_data.json") as json_file:
-            mocked_json_data = json.load(json_file)
-            self.data_handler_1 = DataHandlerFactory.get_instance(ResourceId.CITIES_POPULATION_RESOURCE_ID,
-                                                                  mocked_json_data)
-        self._check_base_step_of_all_methods()
-
-    def tearDown(self) -> None:
-        """ Announce of finishing the class's tests """
-        print("finished testing Cities Class...")
-
-    def _check_base_step_of_all_methods(self) -> None:
-        # Check instance creation
-        self.assertIsInstance(self.data_handler_1, Cities)
-        # Check unequally of different memory addresses of copied df
-        data_dict = self.data_handler_1._get_clean_copy_df_data()
-        self.assertNotEqual(id(data_dict), id(self.data_handler_1.df))
+        self.data_handler_1 = self._init_mocked_data_handler(json_file_path="json_files/cities_mocked_data.json",
+                                                             resource_id_enum=ResourceId.CITIES_POPULATION_RESOURCE_ID)
+        self._check_base_step_of_all_methods(data_handler=self.data_handler_1, class_type=Cities)
 
     def test_cities_by_date(self) -> None:
         """ Tests results of tests cities by specific date and its results as city's tuples """
@@ -62,16 +49,7 @@ class TestCities(unittest.TestCase):
                                'Cumulated_number_of_diagnostic_tests': defaultdict(int, {'אבו גוש': 4365, "אבו ג'ווייעד (שבט)": 250})
                                })
         data = self.data_handler_1.top_cases_in_cities()
-        # Check returned type
-        self.assertIs(type(data), defaultdict)
-        for item in data.values():
-            self.assertIs(type(item), defaultdict)
-            for key, value in item.items():
-                self.assertIsInstance(key, str)
-                self.assertIsInstance(value, int)
-        # check for values equality
-        for data_value, result_value in zip(data.values(), results.values()):
-            self.assertDictEqual(data_value, result_value)
+        self._test_two_level_depth_nested_dictionaries(data, results)
 
     def test_cases_statistics(self) -> None:
         """ Tests the test cases statistics data & type """
