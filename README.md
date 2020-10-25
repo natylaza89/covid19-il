@@ -1,9 +1,10 @@
 ##### ...picture...
 
-## covid19_il
+# covid19_il
 python package which brings a "Facade" interface for using official covid19 israeli data gov's data.
 
 ## *** This project is under construction and gets update almost daily. ***
+
 
 ## Dependencies
 1. pandas
@@ -19,7 +20,7 @@ pip install covid19_il
 ```
 2. more steps...
 
-## TODO:
+## # TODO:
 1. Data Handlers for all israeli data gov's data bases 
 2. Finish TODO section in api handler
 3. Finish TODO section in logger
