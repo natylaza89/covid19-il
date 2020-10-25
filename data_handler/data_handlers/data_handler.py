@@ -43,9 +43,9 @@ class DataHandler(ABC):
         return f"{self.__class__.__name__}({self._logger}, {self._main_data})"
 
     def __str__(self) -> str:
-        return f"{self.__class__.__name__}'s state:\nlogger: {self._logger is None}" \
-               f"\nmain data: {self._main_data is None}"\
-               f"\ndf data: {self._df is None}" \
+        return f"{self.__class__.__name__}'s state:\nlogger: {self._logger.__class__}" \
+               f"\nmain data: {self._main_data.__class__}"\
+               f"\ndf data: {self._df.__class__}" \
                f"\ntotal number: {self._total_number}"
 
     def __bool__(self) -> bool:
