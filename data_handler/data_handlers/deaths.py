@@ -31,7 +31,7 @@ class Deaths(DataHandler):
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) \
             -> DefaultDict[str, DefaultDict[str, int]]:
-        """ Return amount of given column.
+        """ Return amount of given column grouped by age group.
 
         Note:
             private methods which get called by other methods for calculation.
@@ -43,24 +43,20 @@ class Deaths(DataHandler):
         Returns:
             data_dict(DefaultDict[str, DefaultDict[str, int]]): desired data in data holder.
 
-        Raises:
-            KeyError: concrete error which can occurred if data frame can't be access by given key.
         """
 
         data_dict = None
         try:
-            df = self.df.copy()
+            df = self._get_clean_copy_df_data()
             df = df[['age_group', group_by_column]]
-            ser = df.groupby(['age_group'])[group_by_column]
-            data_from_series = ser.value_counts().to_dict()
+            ser_group_by = df.groupby(['age_group'])[group_by_column]
+            data_from_series = ser_group_by.value_counts().to_dict()
             data_dict = defaultdict(lambda: defaultdict(int))
 
             for key, value in data_from_series.items():
                 data_dict[key[0]][key[1]] = value
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-            # TODO: check in tests if exception raise
-            raise
         finally:
             return data_dict
 
@@ -74,22 +70,20 @@ class Deaths(DataHandler):
         Returns:
             data_dict(DefaultDict[str, DefaultDict[str, int]]): desired data in data holder.
 
-        Raises:
-            KeyError: concrete error which can occurred if data frame can't be access by given key.
         """
 
         data_dict = None
         try:
-            df = self.df[['gender', 'age_group']]
+            df = self._get_clean_copy_df_data()
+            df = df[['gender', 'age_group']]
             data = df.value_counts()
             data_dict = defaultdict(lambda: defaultdict(int))
 
             for key, value in data.items():
+                # key[0]: gender, key[1]: age_group
                 data_dict[key[0]][key[1]] = value
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-            # TODO: check in tests if exception raise
-            raise
         finally:
             return data_dict
 
@@ -148,4 +142,3 @@ class Deaths(DataHandler):
         """
 
         return self._get_data_by_column('Time_between_positive_and_death')
-
