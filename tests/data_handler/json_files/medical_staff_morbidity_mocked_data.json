@@ -1,0 +1,251 @@
+{
+    "help": "https://data.gov.il/api/3/action/help_show?name=datastore_search",
+    "success": true,
+    "result": {
+        "include_total": true,
+        "resource_id": "6253ce68-5f31-4381-bb4e-557260d5c9fc",
+        "fields": [
+            {
+                "type": "int",
+                "id": "_id"
+            },
+            {
+                "type": "text",
+                "id": "Date"
+            },
+            {
+                "type": "text",
+                "id": "confirmed_cases_physicians"
+            },
+            {
+                "type": "text",
+                "id": "confirmed_cases_nurses"
+            },
+            {
+                "type": "text",
+                "id": "confirmed_cases_other_healthcare_workers"
+            },
+            {
+                "type": "text",
+                "id": "isolated_physicians"
+            },
+            {
+                "type": "text",
+                "id": "isolated_nurses"
+            },
+            {
+                "type": "text",
+                "id": "isolated_other_healthcare_workers"
+            }
+        ],
+        "records_format": "objects",
+        "records": [
+            {
+                "_id": 1,
+                "Date": "2020-03-15",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "509",
+                "isolated_nurses": "610",
+                "isolated_other_healthcare_workers": "473"
+            },
+            {
+                "_id": 2,
+                "Date": "2020-03-16",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "489",
+                "isolated_nurses": "607",
+                "isolated_other_healthcare_workers": "556"
+            },
+            {
+                "_id": 3,
+                "Date": "2020-03-17",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "503",
+                "isolated_nurses": "623",
+                "isolated_other_healthcare_workers": "602"
+            },
+            {
+                "_id": 4,
+                "Date": "2020-03-18",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "498",
+                "isolated_nurses": "654",
+                "isolated_other_healthcare_workers": "621"
+            },
+            {
+                "_id": 5,
+                "Date": "2020-03-19",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "480",
+                "isolated_nurses": "709",
+                "isolated_other_healthcare_workers": "673"
+            },
+            {
+                "_id": 6,
+                "Date": "2020-03-21",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "517",
+                "isolated_nurses": "871",
+                "isolated_other_healthcare_workers": "775"
+            },
+            {
+                "_id": 7,
+                "Date": "2020-03-22",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "<15",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "542",
+                "isolated_nurses": "871",
+                "isolated_other_healthcare_workers": "811"
+            },
+            {
+                "_id": 8,
+                "Date": "2020-03-23",
+                "confirmed_cases_physicians": "<15",
+                "confirmed_cases_nurses": "18",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "524",
+                "isolated_nurses": "901",
+                "isolated_other_healthcare_workers": "818"
+            },
+            {
+                "_id": 9,
+                "Date": "2020-03-24",
+                "confirmed_cases_physicians": "15",
+                "confirmed_cases_nurses": "18",
+                "confirmed_cases_other_healthcare_workers": "<15",
+                "isolated_physicians": "554",
+                "isolated_nurses": "963",
+                "isolated_other_healthcare_workers": "876"
+            },
+            {
+                "_id": 10,
+                "Date": "2020-03-25",
+                "confirmed_cases_physicians": "17",
+                "confirmed_cases_nurses": "20",
+                "confirmed_cases_other_healthcare_workers": "15",
+                "isolated_physicians": "567",
+                "isolated_nurses": "958",
+                "isolated_other_healthcare_workers": "911"
+            },
+            {
+                "_id": 11,
+                "Date": "2020-03-26",
+                "confirmed_cases_physicians": "18",
+                "confirmed_cases_nurses": "31",
+                "confirmed_cases_other_healthcare_workers": "19",
+                "isolated_physicians": "519",
+                "isolated_nurses": "916",
+                "isolated_other_healthcare_workers": "848"
+            },
+            {
+                "_id": 12,
+                "Date": "2020-03-27",
+                "confirmed_cases_physicians": "19",
+                "confirmed_cases_nurses": "33",
+                "confirmed_cases_other_healthcare_workers": "29",
+                "isolated_physicians": "507",
+                "isolated_nurses": "965",
+                "isolated_other_healthcare_workers": "806"
+            },
+            {
+                "_id": 13,
+                "Date": "2020-03-28",
+                "confirmed_cases_physicians": "31",
+                "confirmed_cases_nurses": "34",
+                "confirmed_cases_other_healthcare_workers": "39",
+                "isolated_physicians": "530",
+                "isolated_nurses": "1003",
+                "isolated_other_healthcare_workers": "773"
+            },
+            {
+                "_id": 14,
+                "Date": "2020-03-29",
+                "confirmed_cases_physicians": "22",
+                "confirmed_cases_nurses": "37",
+                "confirmed_cases_other_healthcare_workers": "40",
+                "isolated_physicians": "481",
+                "isolated_nurses": "912",
+                "isolated_other_healthcare_workers": "814"
+            },
+            {
+                "_id": 15,
+                "Date": "2020-03-30",
+                "confirmed_cases_physicians": "22",
+                "confirmed_cases_nurses": "47",
+                "confirmed_cases_other_healthcare_workers": "45",
+                "isolated_physicians": "487",
+                "isolated_nurses": "1078",
+                "isolated_other_healthcare_workers": "726"
+            },
+            {
+                "_id": 16,
+                "Date": "2020-03-31",
+                "confirmed_cases_physicians": "24",
+                "confirmed_cases_nurses": "51",
+                "confirmed_cases_other_healthcare_workers": "48",
+                "isolated_physicians": "443",
+                "isolated_nurses": "951",
+                "isolated_other_healthcare_workers": "682"
+            },
+            {
+                "_id": 17,
+                "Date": "2020-04-01",
+                "confirmed_cases_physicians": "24",
+                "confirmed_cases_nurses": "71",
+                "confirmed_cases_other_healthcare_workers": "53",
+                "isolated_physicians": "385",
+                "isolated_nurses": "810",
+                "isolated_other_healthcare_workers": "593"
+            },
+            {
+                "_id": 18,
+                "Date": "2020-04-02",
+                "confirmed_cases_physicians": "28",
+                "confirmed_cases_nurses": "79",
+                "confirmed_cases_other_healthcare_workers": "61",
+                "isolated_physicians": "340",
+                "isolated_nurses": "771",
+                "isolated_other_healthcare_workers": "689"
+            },
+            {
+                "_id": 19,
+                "Date": "2020-04-03",
+                "confirmed_cases_physicians": "26",
+                "confirmed_cases_nurses": "69",
+                "confirmed_cases_other_healthcare_workers": "71",
+                "isolated_physicians": "315",
+                "isolated_nurses": "763",
+                "isolated_other_healthcare_workers": "684"
+            },
+            {
+                "_id": 20,
+                "Date": "2020-04-05",
+                "confirmed_cases_physicians": "30",
+                "confirmed_cases_nurses": "87",
+                "confirmed_cases_other_healthcare_workers": "66",
+                "isolated_physicians": "249",
+                "isolated_nurses": "589",
+                "isolated_other_healthcare_workers": "629"
+            }
+        ],
+        "limit": 20,
+        "_links": {
+            "start": "/api/3/action/datastore_search?limit=20&include_total=True&resource_id=6253ce68-5f31-4381-bb4e-557260d5c9fc",
+            "next": "/api/3/action/datastore_search?offset=20&limit=20&include_total=True&resource_id=6253ce68-5f31-4381-bb4e-557260d5c9fc"
+        },
+        "total": 211
+    }
+}
