@@ -1,7 +1,7 @@
 import unittest
 import json
 from collections import defaultdict
-from typing import Union, DefaultDict
+from typing import Union, DefaultDict, Dict
 
 from covid19_il.data_handler.data_handlers_factory.data_handler_factory import DataHandlerFactory
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -28,16 +28,18 @@ class DataHandlerTestsUtils(unittest.TestCase):
         data_dict = data_handler._get_clean_copy_df_data()
         self.assertNotEqual(id(data_dict), id(data_handler.df))
 
-    def _test_two_level_depth_nested_dictionaries(self, data:  DefaultDict[str, DefaultDict[str, int]],
-                                                  results:  DefaultDict[str, DefaultDict[str, int]]) -> None:
+    def _test_two_level_depth_nested_dictionaries(self,
+                                                  data:  DefaultDict[str, DefaultDict[str, int]],
+                                                  results:  DefaultDict[str, DefaultDict[str, int] or Dict[str, int]])\
+            -> None:
         """ Tests Nested Dictionaries with 2 level depth """
         # check returned type
-        self.assertIs(type(data), defaultdict)
+        self.assertIsInstance(data, defaultdict)
         for item in data.values():
-            self.assertIs(type(item), defaultdict)
+            self.assertIsInstance(item, (defaultdict, dict))
             for key, value in item.items():
                 self.assertIsInstance(key, str)
-                self.assertIsInstance(value, int)
+                self.assertIsInstance(value, (int, float, str))
         # check for values equality
         for data_value, result_value in zip(data.values(), results.values()):
             self.assertDictEqual(data_value, result_value)
@@ -48,9 +50,9 @@ class DataHandlerTestsUtils(unittest.TestCase):
             -> None:
         """ Tests Nested Dictionaries with 3 level depth """
         # Check returned type
-        self.assertIs(type(data), defaultdict)
+        self.assertIsInstance(data, defaultdict)
         for item in data.values():
-            self.assertIs(type(item), defaultdict)
+            self.assertIsInstance(item, defaultdict)
             for key, value in item.items():
                 self.assertIsInstance(key, str)
                 self.assertIsInstance(value, defaultdict)
