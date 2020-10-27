@@ -1,7 +1,8 @@
 import unittest
 import json
 from collections import defaultdict
-from typing import Union, DefaultDict, Dict
+from numpy import int64 as numpy_int64, float64 as numpy_float64
+from typing import Union, DefaultDict, Dict, Any
 
 from covid19_il.data_handler.data_handlers_factory.data_handler_factory import DataHandlerFactory
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -28,25 +29,39 @@ class DataHandlerTestsUtils(unittest.TestCase):
         data_dict = data_handler._get_clean_copy_df_data()
         self.assertNotEqual(id(data_dict), id(data_handler.df))
 
+    def _test_one_level_depth_dictionary(self,
+                                              data: DefaultDict[str, Any] or
+                                                    Dict[str, Any],
+                                              results: DefaultDict[str, Any] or
+                                                       Dict[str, Any]) -> None:
+        """ Tests Dictionary with normal 1 level depth """
+        self.assertIsInstance(data, (dict, defaultdict))
+        self.assertDictEqual(data, results)
+        for key, value in data.items():
+            self.assertIsInstance(key, str)
+            self.assertIsInstance(value, (int, float, str))
+
     def _test_two_level_depth_nested_dictionaries(self,
-                                                  data:  DefaultDict[str, DefaultDict[str, int]],
-                                                  results:  DefaultDict[str, DefaultDict[str, int] or Dict[str, int]])\
-            -> None:
+                                                  data: DefaultDict[str, DefaultDict[str, int]] or
+                                                        Dict[str, Dict[str, str]],
+                                                  results: DefaultDict[str, DefaultDict[str, int] or
+                                                           Dict[str, int]] or
+                                                           Dict[str, Dict[str, str]]) -> None:
         """ Tests Nested Dictionaries with 2 level depth """
         # check returned type
-        self.assertIsInstance(data, defaultdict)
+        self.assertIsInstance(data, (defaultdict, dict))
         for item in data.values():
             self.assertIsInstance(item, (defaultdict, dict))
             for key, value in item.items():
                 self.assertIsInstance(key, str)
-                self.assertIsInstance(value, (int, float, str))
+                self.assertIsInstance(value, (int, float, str, numpy_int64, numpy_float64))
         # check for values equality
         for data_value, result_value in zip(data.values(), results.values()):
             self.assertDictEqual(data_value, result_value)
 
     def _test_three_level_depth_nested_dictionaries(self,
                                                     data: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]],
-                                                    results: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]])\
+                                                    results: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]]) \
             -> None:
         """ Tests Nested Dictionaries with 3 level depth """
         # Check returned type
