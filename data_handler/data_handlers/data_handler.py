@@ -226,7 +226,7 @@ class DataHandler(ABC):
         finally:
             return data_dict
 
-    def _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr]) -> Dict[str, Dict[str, int or float]]:
+    def _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr, AnyStr, AnyStr]) -> Dict[str, Dict[str, int or float]]:
         """ Returns statistics from data manipulation of given columns via data frame's columns.
 
         Note:
@@ -236,7 +236,6 @@ class DataHandler(ABC):
 
         Returns:
             data_dict(Dict[str, Dict[str, int or float]]): desired data.
-            :rtype: object
 
         """
         data_dict = None
