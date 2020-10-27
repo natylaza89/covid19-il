@@ -51,8 +51,4 @@ class TestHospitalized(DataHandlerTestsUtils):
         data = self.data_handler_1.hospitalized_stats_by_date("2020-03-20")
         results = {'מאושפזים': 277, 'אחוז נשים מאושפזות': 42.2, 'גיל ממוצע מאושפזים': 50, 'סטיית תקן גיל מאושפזים': 19.3, 'מונשמים': '<15', 'אחוז נשים מונשמות': 36.4, 'גיל ממוצע מונשמים': 70, 'סטיית תקן גיל מונשמים': 12.8, 'חולים קל': 242, 'אחוז נשים חולות קל': 43.4, 'גיל ממוצע חולים קל': 48, 'סטיית תקן גיל חולים קל': 19.0, 'חולים בינוני': '15.0', 'אחוז נשים חולות בינוני': '26.7', 'גיל ממוצע חולים בינוני': '59.0', 'סטיית תקן גיל חולים בינוני': '12.5', 'חולים קשה': '20.0', 'אחוז נשים חולות קשה': 40.0, 'גיל ממוצע חולים קשה': 71, 'סטיית תקן גיל חולים קשה': 11.9, 'חולים קשה מצטבר': '23.0'}
         # Data Validation
-        self.assertIsInstance(data, dict)
-        self.assertDictEqual(data, results)
-        for key, value in data.items():
-            self.assertIsInstance(key, str)
-            self.assertIsInstance(value, (int, float, str))
+        self._test_one_level_depth_dictionary(data, results)
