@@ -3,6 +3,7 @@ from typing import Dict
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
+from covid19_il.data_handler.enums.quarantine_amount import QuarantineAmount
 
 
 class Quarantine(DataHandler):
@@ -36,7 +37,8 @@ class Quarantine(DataHandler):
 
         """
 
-        return self._get_data_by_column('isolated_today_contact_with_confirmed', ascending_order=True)
+        return self._get_data_by_column(QuarantineAmount.isolated_today_contact_with_confirmed.name,
+                                        ascending_order=True)
 
     @lru_cache
     def isolated_today_abroad(self) -> Dict:
@@ -50,7 +52,7 @@ class Quarantine(DataHandler):
 
         """
 
-        return self._get_data_by_column('isolated_today_abroad', ascending_order=True)
+        return self._get_data_by_column(QuarantineAmount.isolated_today_abroad.name, ascending_order=True)
 
     @lru_cache
     def new_contact_with_confirmed(self) -> Dict:
@@ -64,7 +66,7 @@ class Quarantine(DataHandler):
 
         """
 
-        return self._get_data_by_column('new_contact_with_confirmed', ascending_order=True)
+        return self._get_data_by_column(QuarantineAmount.new_contact_with_confirmed.name, ascending_order=True)
 
     @lru_cache
     def new_from_abroad(self) -> Dict:
@@ -78,4 +80,4 @@ class Quarantine(DataHandler):
 
         """
 
-        return self._get_data_by_column('new_from_abroad', ascending_order=True)
+        return self._get_data_by_column(QuarantineAmount.new_from_abroad.name, ascending_order=True)
