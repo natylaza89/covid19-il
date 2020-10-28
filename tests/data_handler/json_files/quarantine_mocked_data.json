@@ -1,0 +1,203 @@
+{
+    "help": "https://data.gov.il/api/3/action/help_show?name=datastore_search",
+    "success": true,
+    "result": {
+        "include_total": true,
+        "resource_id": "9eedd26c-019b-433a-b28b-efcc98de378d",
+        "fields": [
+            {
+                "type": "int",
+                "id": "_id"
+            },
+            {
+                "type": "text",
+                "id": "date"
+            },
+            {
+                "type": "text",
+                "id": "isolated_today_contact_with_confirmed"
+            },
+            {
+                "type": "text",
+                "id": "isolated_today_abroad"
+            },
+            {
+                "type": "text",
+                "id": "new_contact_with_confirmed"
+            },
+            {
+                "type": "text",
+                "id": "new_from_abroad"
+            }
+        ],
+        "records_format": "objects",
+        "records": [
+            {
+                "_id": 1,
+                "date": "2020-10-24",
+                "isolated_today_contact_with_confirmed": "38074",
+                "isolated_today_abroad": "29596",
+                "new_contact_with_confirmed": "1361",
+                "new_from_abroad": "1500"
+            },
+            {
+                "_id": 2,
+                "date": "2020-10-23",
+                "isolated_today_contact_with_confirmed": "40270",
+                "isolated_today_abroad": "29054",
+                "new_contact_with_confirmed": "2004",
+                "new_from_abroad": "1416"
+            },
+            {
+                "_id": 3,
+                "date": "2020-10-22",
+                "isolated_today_contact_with_confirmed": "43707",
+                "isolated_today_abroad": "29177",
+                "new_contact_with_confirmed": "3386",
+                "new_from_abroad": "2577"
+            },
+            {
+                "_id": 4,
+                "date": "2020-10-21",
+                "isolated_today_contact_with_confirmed": "46275",
+                "isolated_today_abroad": "27859",
+                "new_contact_with_confirmed": "3763",
+                "new_from_abroad": "2563"
+            },
+            {
+                "_id": 5,
+                "date": "2020-10-20",
+                "isolated_today_contact_with_confirmed": "49581",
+                "isolated_today_abroad": "26441",
+                "new_contact_with_confirmed": "3686",
+                "new_from_abroad": "2466"
+            },
+            {
+                "_id": 6,
+                "date": "2020-10-19",
+                "isolated_today_contact_with_confirmed": "52726",
+                "isolated_today_abroad": "25495",
+                "new_contact_with_confirmed": "3651",
+                "new_from_abroad": "2838"
+            },
+            {
+                "_id": 7,
+                "date": "2020-10-18",
+                "isolated_today_contact_with_confirmed": "56041",
+                "isolated_today_abroad": "24413",
+                "new_contact_with_confirmed": "3573",
+                "new_from_abroad": "3234"
+            },
+            {
+                "_id": 8,
+                "date": "2020-10-17",
+                "isolated_today_contact_with_confirmed": "57557",
+                "isolated_today_abroad": "22684",
+                "new_contact_with_confirmed": "1743",
+                "new_from_abroad": "1139"
+            },
+            {
+                "_id": 9,
+                "date": "2020-10-16",
+                "isolated_today_contact_with_confirmed": "62220",
+                "isolated_today_abroad": "22807",
+                "new_contact_with_confirmed": "2749",
+                "new_from_abroad": "1304"
+            },
+            {
+                "_id": 10,
+                "date": "2020-10-15",
+                "isolated_today_contact_with_confirmed": "70072",
+                "isolated_today_abroad": "24167",
+                "new_contact_with_confirmed": "3763",
+                "new_from_abroad": "2248"
+            },
+            {
+                "_id": 11,
+                "date": "2020-10-14",
+                "isolated_today_contact_with_confirmed": "75247",
+                "isolated_today_abroad": "23684",
+                "new_contact_with_confirmed": "4948",
+                "new_from_abroad": "1658"
+            },
+            {
+                "_id": 12,
+                "date": "2020-10-13",
+                "isolated_today_contact_with_confirmed": "78829",
+                "isolated_today_abroad": "23759",
+                "new_contact_with_confirmed": "5659",
+                "new_from_abroad": "1942"
+            },
+            {
+                "_id": 13,
+                "date": "2020-10-12",
+                "isolated_today_contact_with_confirmed": "78015",
+                "isolated_today_abroad": "21873",
+                "new_contact_with_confirmed": "6375",
+                "new_from_abroad": "1876"
+            },
+            {
+                "_id": 14,
+                "date": "2020-10-11",
+                "isolated_today_contact_with_confirmed": "77198",
+                "isolated_today_abroad": "21054",
+                "new_contact_with_confirmed": "5463",
+                "new_from_abroad": "1952"
+            },
+            {
+                "_id": 15,
+                "date": "2020-10-10",
+                "isolated_today_contact_with_confirmed": "76306",
+                "isolated_today_abroad": "20136",
+                "new_contact_with_confirmed": "2890",
+                "new_from_abroad": "1048"
+            },
+            {
+                "_id": 16,
+                "date": "2020-10-09",
+                "isolated_today_contact_with_confirmed": "79632",
+                "isolated_today_abroad": "20371",
+                "new_contact_with_confirmed": "4845",
+                "new_from_abroad": "1058"
+            },
+            {
+                "_id": 17,
+                "date": "2020-10-08",
+                "isolated_today_contact_with_confirmed": "85333",
+                "isolated_today_abroad": "21293",
+                "new_contact_with_confirmed": "7884",
+                "new_from_abroad": "1547"
+            },
+            {
+                "_id": 18,
+                "date": "2020-10-07",
+                "isolated_today_contact_with_confirmed": "86487",
+                "isolated_today_abroad": "21149",
+                "new_contact_with_confirmed": "9005",
+                "new_from_abroad": "1177"
+            },
+            {
+                "_id": 19,
+                "date": "2020-10-06",
+                "isolated_today_contact_with_confirmed": "86803",
+                "isolated_today_abroad": "21838",
+                "new_contact_with_confirmed": "9420",
+                "new_from_abroad": "1209"
+            },
+            {
+                "_id": 20,
+                "date": "2020-10-05",
+                "isolated_today_contact_with_confirmed": "85754",
+                "isolated_today_abroad": "22032",
+                "new_contact_with_confirmed": "10158",
+                "new_from_abroad": "1416"
+            }
+        ],
+        "limit": 20,
+        "_links": {
+            "start": "/api/3/action/datastore_search?limit=20&include_total=True&resource_id=9eedd26c-019b-433a-b28b-efcc98de378d",
+            "next": "/api/3/action/datastore_search?offset=20&limit=20&include_total=True&resource_id=9eedd26c-019b-433a-b28b-efcc98de378d"
+        },
+        "total": 238
+    }
+}
