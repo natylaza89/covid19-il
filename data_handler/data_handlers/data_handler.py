@@ -167,8 +167,9 @@ class DataHandler(ABC):
         """
         seed(0)
         return randint(1, 15) if (input_string == "<15" or
-                                  input_string == "NULL" or
-                                  input_string == math.isnan(float(input_string))) else int(input_string)
+                                  input_string == "NULL") or \
+                                  input_string == math.isnan(float(input_string)) \
+            else int(input_string.split('.')[0])
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) -> Dict:
         """ Returns a dictionary of top total amount of given column name via data frame.
