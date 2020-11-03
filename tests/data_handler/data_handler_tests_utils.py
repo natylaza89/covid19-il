@@ -61,10 +61,12 @@ class DataHandlerTestsUtils(unittest.TestCase):
             self.assertDictEqual(data_value, result_value)
 
     def _test_three_level_depth_nested_dictionaries(self,
-                                                    data: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]] or
-                                                          DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]],
-                                                    results: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]] or
-                                                             DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]]) \
+                                            data: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]] or
+                                                  DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]] or
+                                                  DefaultDict[str, DefaultDict[str, Dict[str, Union[int, float, str]]]],
+                                        results: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]] or
+                                                 DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]] or
+                                                 DefaultDict[str, DefaultDict[str, Dict[str, Union[int, float, str]]]])\
             -> None:
         """ Tests Nested Dictionaries with 3 level depth """
         # Check returned type
@@ -76,14 +78,16 @@ class DataHandlerTestsUtils(unittest.TestCase):
                 self.assertIsInstance(value, (defaultdict, dict))
                 for sub_key, sub_value in value.items():
                     self.assertIsInstance(sub_key, str)
-                    self.assertIsInstance(sub_value, int)
+                    self.assertIsInstance(sub_value, (int, str, numpy_int64, numpy_float64))
         # check for values equality
         for data_value, result_value in zip(data.values(), results.values()):
             self.assertDictEqual(data_value, result_value)
 
     def _test_four_level_depth_nested_dictionaries(self,
-                                        data: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]],
-                                        results: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]])\
+                                        data: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]] or
+                                              DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]],
+                                        results: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]] or
+                                                 DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]],)\
             -> None:
         """ Tests Nested Dictionaries with 3 level depth """
         # Check returned type
@@ -99,7 +103,7 @@ class DataHandlerTestsUtils(unittest.TestCase):
                     self.assertIsInstance(sub_value, (defaultdict, dict))
                     for sub2_key, sub2_value in sub_value.items():
                         self.assertIsInstance(sub2_key, str)
-                        self.assertIsInstance(sub2_value, int)
+                        self.assertIsInstance(sub2_value, (int, str))
         # check for values equality
         for data_value, result_value in zip(data.values(), results.values()):
             self.assertDictEqual(data_value, result_value)
