@@ -1,0 +1,605 @@
+{
+    "help": "https://data.gov.il/api/3/action/help_show?name=datastore_search",
+    "success": true,
+    "result": {
+        "include_total": true,
+        "resource_id": "89f61e3a-4866-4bbf-bcc1-9734e5fee58e",
+        "fields": [
+            {
+                "type": "int",
+                "id": "_id"
+            },
+            {
+                "type": "text",
+                "id": "first_week_day"
+            },
+            {
+                "type": "text",
+                "id": "last_week_day"
+            },
+            {
+                "type": "text",
+                "id": "age_group"
+            },
+            {
+                "type": "text",
+                "id": "gender"
+            },
+            {
+                "type": "text",
+                "id": "weekly_tests_num"
+            },
+            {
+                "type": "text",
+                "id": "weekly_newly_tested"
+            },
+            {
+                "type": "text",
+                "id": "weekly_cases"
+            },
+            {
+                "type": "text",
+                "id": "weekly_deceased"
+            }
+        ],
+        "records_format": "objects",
+        "records": [
+            {
+                "_id": 1,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "0-19",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "29.0",
+                "weekly_newly_tested": "29.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 2,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "0-19",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "1088.0",
+                "weekly_newly_tested": "1037.0",
+                "weekly_cases": "37.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 3,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "0-19",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "899.0",
+                "weekly_newly_tested": "863.0",
+                "weekly_cases": "39.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 4,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "20-24",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 5,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "20-24",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "695.0",
+                "weekly_newly_tested": "650.0",
+                "weekly_cases": "105.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 6,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "20-24",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "623.0",
+                "weekly_newly_tested": "604.0",
+                "weekly_cases": "34.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 7,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "25-29",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "<15",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 8,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "25-29",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "749.0",
+                "weekly_newly_tested": "716.0",
+                "weekly_cases": "51.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 9,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "25-29",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "588.0",
+                "weekly_newly_tested": "563.0",
+                "weekly_cases": "53.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 10,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "30-34",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 11,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "30-34",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "700.0",
+                "weekly_newly_tested": "639.0",
+                "weekly_cases": "39.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 12,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "30-34",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "661.0",
+                "weekly_newly_tested": "608.0",
+                "weekly_cases": "66.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 13,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "35-39",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "579.0",
+                "weekly_newly_tested": "528.0",
+                "weekly_cases": "55.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 14,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "35-39",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 15,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "35-39",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "521.0",
+                "weekly_newly_tested": "494.0",
+                "weekly_cases": "28.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 16,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "40-44",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "474.0",
+                "weekly_newly_tested": "431.0",
+                "weekly_cases": "21.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 17,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "40-44",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "417.0",
+                "weekly_newly_tested": "384.0",
+                "weekly_cases": "35.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 18,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "40-44",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 19,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "45-49",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 20,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "45-49",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "384.0",
+                "weekly_newly_tested": "366.0",
+                "weekly_cases": "18.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 21,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "45-49",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "367.0",
+                "weekly_newly_tested": "328.0",
+                "weekly_cases": "41.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 22,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "50-54",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "387.0",
+                "weekly_newly_tested": "365.0",
+                "weekly_cases": "24.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 23,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "50-54",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 24,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "50-54",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "302.0",
+                "weekly_newly_tested": "273.0",
+                "weekly_cases": "37.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 25,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "55-59",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 26,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "55-59",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "214.0",
+                "weekly_newly_tested": "187.0",
+                "weekly_cases": "27.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 27,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "55-59",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "350.0",
+                "weekly_newly_tested": "324.0",
+                "weekly_cases": "27.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 28,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "60-64",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "246.0",
+                "weekly_newly_tested": "222.0",
+                "weekly_cases": "24.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 29,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "60-64",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "305.0",
+                "weekly_newly_tested": "284.0",
+                "weekly_cases": "25.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 30,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "60-64",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "0.0",
+                "weekly_newly_tested": "0.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 31,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "65-69",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 32,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "65-69",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "222.0",
+                "weekly_newly_tested": "199.0",
+                "weekly_cases": "16.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 33,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "65-69",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "263.0",
+                "weekly_newly_tested": "230.0",
+                "weekly_cases": "34.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 34,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "70-74",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "164.0",
+                "weekly_newly_tested": "143.0",
+                "weekly_cases": "19.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 35,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "70-74",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "214.0",
+                "weekly_newly_tested": "179.0",
+                "weekly_cases": "31.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 36,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "70-74",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "<15",
+                "weekly_newly_tested": "<15",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 37,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "75-79",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "107.0",
+                "weekly_newly_tested": "96.0",
+                "weekly_cases": "<15",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 38,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "75-79",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "83.0",
+                "weekly_newly_tested": "78.0",
+                "weekly_cases": "<15",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 39,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "75-79",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "0.0",
+                "weekly_newly_tested": "0.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 40,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "80+",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "182.0",
+                "weekly_newly_tested": "161.0",
+                "weekly_cases": "<15",
+                "weekly_deceased": "<15"
+            },
+            {
+                "_id": 41,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "80+",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "223.0",
+                "weekly_newly_tested": "188.0",
+                "weekly_cases": "<15",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 42,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "80+",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "0.0",
+                "weekly_newly_tested": "0.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 43,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "NULL",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "39.0",
+                "weekly_newly_tested": "36.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 44,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "NULL",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "292.0",
+                "weekly_newly_tested": "272.0",
+                "weekly_cases": "<15",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 45,
+                "first_week_day": "2020-03-15",
+                "last_week_day": "2020-03-21",
+                "age_group": "NULL",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "310.0",
+                "weekly_newly_tested": "288.0",
+                "weekly_cases": "<15",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 46,
+                "first_week_day": "2020-03-22",
+                "last_week_day": "2020-03-28",
+                "age_group": "0-19",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "92.0",
+                "weekly_newly_tested": "91.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 47,
+                "first_week_day": "2020-03-22",
+                "last_week_day": "2020-03-28",
+                "age_group": "0-19",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "2428.0",
+                "weekly_newly_tested": "2281.0",
+                "weekly_cases": "191.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 48,
+                "first_week_day": "2020-03-22",
+                "last_week_day": "2020-03-28",
+                "age_group": "0-19",
+                "gender": "\u05e0\u05e7\u05d1\u05d4",
+                "weekly_tests_num": "2231.0",
+                "weekly_newly_tested": "2086.0",
+                "weekly_cases": "166.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 49,
+                "first_week_day": "2020-03-22",
+                "last_week_day": "2020-03-28",
+                "age_group": "20-24",
+                "gender": "\u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2",
+                "weekly_tests_num": "143.0",
+                "weekly_newly_tested": "140.0",
+                "weekly_cases": "0.0",
+                "weekly_deceased": "0.0"
+            },
+            {
+                "_id": 50,
+                "first_week_day": "2020-03-22",
+                "last_week_day": "2020-03-28",
+                "age_group": "20-24",
+                "gender": "\u05d6\u05db\u05e8",
+                "weekly_tests_num": "2076.0",
+                "weekly_newly_tested": "1894.0",
+                "weekly_cases": "219.0",
+                "weekly_deceased": "0.0"
+            }
+        ],
+        "limit": 50,
+        "_links": {
+            "start": "/api/3/action/datastore_search?limit=50&include_total=True&resource_id=89f61e3a-4866-4bbf-bcc1-9734e5fee58e",
+            "next": "/api/3/action/datastore_search?offset=50&limit=50&include_total=True&resource_id=89f61e3a-4866-4bbf-bcc1-9734e5fee58e"
+        },
+        "total": 1440
+    }
+}
