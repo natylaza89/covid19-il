@@ -31,7 +31,7 @@ class AgeGender(DataHandler):
         super().__init__(logger, json_data)
 
     @lru_cache
-    def statistics_by_gender(self) -> DefaultDict[str, DefaultDict[str, Dict[str, str]]]:
+    def statistics_by_gender(self) -> DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]]:
         """ Returns statistic data via first week day with results which grouped by gender.
 
         Args:
@@ -45,7 +45,7 @@ class AgeGender(DataHandler):
         return self._get_statistics_by_columns_names(AgeGender.calculated_fields)
 
     def _get_statistics_by_columns_names(self, columns_names: Tuple) \
-            -> DefaultDict[str, DefaultDict[str, Dict[str, str]]]:
+            -> DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]]:
         """ Returns statistic data via first week day with results which grouped by gender.
 
         Note:
@@ -55,7 +55,7 @@ class AgeGender(DataHandler):
             columns_names(Tuple): required columns name of data frames for data manipulations.
 
         Returns:
-            data dict: (DefaultDict[str, DefaultDict[str, Dict[str, str]]]): desired data inside data holder.
+            data dict: (DefaultDict[str, DefaultDict[str, Dict[str, Dict[int or str]]]]): desired data inside data holder.
 
         """
 
@@ -75,14 +75,14 @@ class AgeGender(DataHandler):
             return data_dict
 
     @lru_cache
-    def statistics_by_given_first_week_day(self, week_day: str) -> DefaultDict[str, Dict[str, str]]:
+    def statistics_by_given_first_week_day(self, week_day: str) -> DefaultDict[str, Dict[str, Dict[str, str]]]:
         """ Returns statistic data by given first week day grouped by gender.
 
         Args:
             week_day(str): given week day for data manipulation.
 
         Returns:
-            data dict(DefaultDict[str, Dict[str, int or float]]): desired data inside data holder.
+            data dict(DefaultDict[str, Dict[str, Dict[str, str]]]): desired data inside data holder.
 
         """
 
