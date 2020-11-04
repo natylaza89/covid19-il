@@ -4,7 +4,7 @@ from covid19_il.data_handler.enums.resource_id import ResourceId
 
 from covid19_il.data_handler.data_handlers.area import Area
 from covid19_il.data_handler.data_handlers.quarantine import Quarantine
-# TODO: resource id 3
+from covid19_il.data_handler.data_handlers.lab_tests import LabTests
 from covid19_il.data_handler.data_handlers.tested_individuals import TestedIndividuals
 # TODO: resource id 5
 from covid19_il.data_handler.data_handlers.recovered import Recovered
@@ -74,7 +74,7 @@ class DataHandlerFactory:
         switch_case = {
             1: Area(Logger().logger, json_data),
             2: Quarantine(Logger().logger, json_data),
-            # TODO: 3: LabTests(Logger().logger, json_data),
+            3: LabTests(Logger().logger, json_data),
             4: TestedIndividuals(Logger().logger, json_data),
             # TODO: 5: TestedIndividualsScores(Logger().logger, json_data),
             6: Recovered(Logger().logger, json_data),
