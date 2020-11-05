@@ -49,6 +49,7 @@ class TestCities(DataHandlerTestsUtils):
                                'Cumulated_number_of_diagnostic_tests': defaultdict(int, {'אבו גוש': 4365, "אבו ג'ווייעד (שבט)": 250})
                                })
         data = self.data_handler_1.top_cases_in_cities()
+        # Data Validation
         self._test_two_level_depth_nested_dictionaries(data, results)
 
     def test_cases_statistics(self) -> None:
@@ -60,13 +61,5 @@ class TestCities(DataHandlerTestsUtils):
                    'Cumulated_number_of_tests': {'min': 0, 'max': 4584, 'mean': 677.404, 'sum': 338702},
                    'Cumulated_number_of_diagnostic_tests': {'min': 0, 'max': 4439, 'mean': 665.46, 'sum': 332730}}
         data = self.data_handler_1.cases_statistics()
-        # Check returned type
-        self.assertIs(type(data), dict)
-        for item in data.values():
-            self.assertIs(type(item), dict)
-            for key, value in item.items():
-                self.assertIsInstance(key, str)
-                self.assertTrue((type(value) is numpy_int64) or (type(value) is numpy_float64))
-        # check for values equality
-        for data_value, result_value in zip(data.values(), results.values()):
-            self.assertDictEqual(data_value, result_value)
+        # Data Validation
+        self._test_two_level_depth_nested_dictionaries(data, results)
