@@ -41,7 +41,7 @@ class TestedIndividuals(DataHandler):
         data_dict = None
         try:
             df = self._get_clean_copy_df_data()
-            df['test_date'] = df[df['test_date'] == date_string]
+            df = df[df['test_date'] == date_string]
             df = df[['corona_result', 'gender']]
             ser_group_by = df.groupby('corona_result')['gender'].value_counts()
             data_dict = defaultdict(lambda: defaultdict(int))
