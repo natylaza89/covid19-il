@@ -1,0 +1,715 @@
+{
+    "help": "https://data.gov.il/api/3/action/help_show?name=datastore_search",
+    "success": true,
+    "result": {
+        "include_total": true,
+        "resource_id": "09e66a69-ad5b-4c46-a5d9-1d1479b1f338",
+        "fields": [
+            {
+                "type": "int",
+                "id": "_id"
+            },
+            {
+                "type": "text",
+                "id": "test_date"
+            },
+            {
+                "type": "text",
+                "id": "age_60_and_above"
+            },
+            {
+                "type": "text",
+                "id": "male"
+            },
+            {
+                "type": "text",
+                "id": "female"
+            },
+            {
+                "type": "text",
+                "id": "NULL"
+            }
+        ],
+        "records_format": "objects",
+        "records": [
+            {
+                "_id": 1,
+                "test_date": "2020-10-05",
+                "age_60_and_above": "NULL",
+                "male": "296",
+                "female": "330",
+                "NULL": "45"
+            },
+            {
+                "_id": 2,
+                "test_date": "2020-10-05",
+                "age_60_and_above": "No",
+                "male": "17578",
+                "female": "21223",
+                "NULL": "130"
+            },
+            {
+                "_id": 3,
+                "test_date": "2020-10-05",
+                "age_60_and_above": "Yes",
+                "male": "4222",
+                "female": "6725",
+                "NULL": "8"
+            },
+            {
+                "_id": 4,
+                "test_date": "2020-10-06",
+                "age_60_and_above": "NULL",
+                "male": "326",
+                "female": "260",
+                "NULL": "50"
+            },
+            {
+                "_id": 5,
+                "test_date": "2020-10-06",
+                "age_60_and_above": "No",
+                "male": "15676",
+                "female": "19049",
+                "NULL": "43"
+            },
+            {
+                "_id": 6,
+                "test_date": "2020-10-06",
+                "age_60_and_above": "Yes",
+                "male": "3601",
+                "female": "5624",
+                "NULL": "6"
+            },
+            {
+                "_id": 7,
+                "test_date": "2020-10-07",
+                "age_60_and_above": "NULL",
+                "male": "262",
+                "female": "315",
+                "NULL": "10"
+            },
+            {
+                "_id": 8,
+                "test_date": "2020-10-07",
+                "age_60_and_above": "No",
+                "male": "17397",
+                "female": "20959",
+                "NULL": "46"
+            },
+            {
+                "_id": 9,
+                "test_date": "2020-10-07",
+                "age_60_and_above": "Yes",
+                "male": "4475",
+                "female": "7096",
+                "NULL": "43"
+            },
+            {
+                "_id": 10,
+                "test_date": "2020-10-08",
+                "age_60_and_above": "NULL",
+                "male": "307",
+                "female": "213",
+                "NULL": "21"
+            },
+            {
+                "_id": 11,
+                "test_date": "2020-10-08",
+                "age_60_and_above": "No",
+                "male": "14417",
+                "female": "17179",
+                "NULL": "81"
+            },
+            {
+                "_id": 12,
+                "test_date": "2020-10-08",
+                "age_60_and_above": "Yes",
+                "male": "3164",
+                "female": "4734",
+                "NULL": "58"
+            },
+            {
+                "_id": 13,
+                "test_date": "2020-10-09",
+                "age_60_and_above": "NULL",
+                "male": "151",
+                "female": "149",
+                "NULL": "20"
+            },
+            {
+                "_id": 14,
+                "test_date": "2020-10-09",
+                "age_60_and_above": "No",
+                "male": "7167",
+                "female": "8074",
+                "NULL": "75"
+            },
+            {
+                "_id": 15,
+                "test_date": "2020-10-09",
+                "age_60_and_above": "Yes",
+                "male": "2021",
+                "female": "2783",
+                "NULL": "0"
+            },
+            {
+                "_id": 16,
+                "test_date": "2020-10-10",
+                "age_60_and_above": "NULL",
+                "male": "77",
+                "female": "72",
+                "NULL": "3"
+            },
+            {
+                "_id": 17,
+                "test_date": "2020-10-10",
+                "age_60_and_above": "No",
+                "male": "2442",
+                "female": "2502",
+                "NULL": "10"
+            },
+            {
+                "_id": 18,
+                "test_date": "2020-10-10",
+                "age_60_and_above": "Yes",
+                "male": "681",
+                "female": "707",
+                "NULL": "0"
+            },
+            {
+                "_id": 19,
+                "test_date": "2020-10-11",
+                "age_60_and_above": "NULL",
+                "male": "275",
+                "female": "199",
+                "NULL": "40"
+            },
+            {
+                "_id": 20,
+                "test_date": "2020-10-11",
+                "age_60_and_above": "No",
+                "male": "12020",
+                "female": "13219",
+                "NULL": "40"
+            },
+            {
+                "_id": 21,
+                "test_date": "2020-10-11",
+                "age_60_and_above": "Yes",
+                "male": "2498",
+                "female": "3281",
+                "NULL": "2"
+            },
+            {
+                "_id": 22,
+                "test_date": "2020-10-12",
+                "age_60_and_above": "NULL",
+                "male": "269",
+                "female": "325",
+                "NULL": "41"
+            },
+            {
+                "_id": 23,
+                "test_date": "2020-10-12",
+                "age_60_and_above": "No",
+                "male": "11984",
+                "female": "14040",
+                "NULL": "107"
+            },
+            {
+                "_id": 24,
+                "test_date": "2020-10-12",
+                "age_60_and_above": "Yes",
+                "male": "2616",
+                "female": "3526",
+                "NULL": "5"
+            },
+            {
+                "_id": 25,
+                "test_date": "2020-10-13",
+                "age_60_and_above": "NULL",
+                "male": "250",
+                "female": "382",
+                "NULL": "35"
+            },
+            {
+                "_id": 26,
+                "test_date": "2020-10-13",
+                "age_60_and_above": "No",
+                "male": "9947",
+                "female": "11265",
+                "NULL": "20"
+            },
+            {
+                "_id": 27,
+                "test_date": "2020-10-13",
+                "age_60_and_above": "Yes",
+                "male": "2333",
+                "female": "3058",
+                "NULL": "5"
+            },
+            {
+                "_id": 28,
+                "test_date": "2020-10-14",
+                "age_60_and_above": "NULL",
+                "male": "246",
+                "female": "205",
+                "NULL": "27"
+            },
+            {
+                "_id": 29,
+                "test_date": "2020-10-14",
+                "age_60_and_above": "No",
+                "male": "9412",
+                "female": "10472",
+                "NULL": "22"
+            },
+            {
+                "_id": 30,
+                "test_date": "2020-10-14",
+                "age_60_and_above": "Yes",
+                "male": "2315",
+                "female": "3129",
+                "NULL": "4"
+            },
+            {
+                "_id": 31,
+                "test_date": "2020-10-15",
+                "age_60_and_above": "NULL",
+                "male": "274",
+                "female": "159",
+                "NULL": "40"
+            },
+            {
+                "_id": 32,
+                "test_date": "2020-10-15",
+                "age_60_and_above": "No",
+                "male": "9752",
+                "female": "10468",
+                "NULL": "31"
+            },
+            {
+                "_id": 33,
+                "test_date": "2020-10-15",
+                "age_60_and_above": "Yes",
+                "male": "2263",
+                "female": "3269",
+                "NULL": "20"
+            },
+            {
+                "_id": 34,
+                "test_date": "2020-10-16",
+                "age_60_and_above": "NULL",
+                "male": "131",
+                "female": "164",
+                "NULL": "14"
+            },
+            {
+                "_id": 35,
+                "test_date": "2020-10-16",
+                "age_60_and_above": "No",
+                "male": "5519",
+                "female": "10470",
+                "NULL": "12"
+            },
+            {
+                "_id": 36,
+                "test_date": "2020-10-16",
+                "age_60_and_above": "Yes",
+                "male": "1501",
+                "female": "2749",
+                "NULL": "1"
+            },
+            {
+                "_id": 37,
+                "test_date": "2020-10-17",
+                "age_60_and_above": "NULL",
+                "male": "61",
+                "female": "79",
+                "NULL": "1"
+            },
+            {
+                "_id": 38,
+                "test_date": "2020-10-17",
+                "age_60_and_above": "No",
+                "male": "2089",
+                "female": "5318",
+                "NULL": "3"
+            },
+            {
+                "_id": 39,
+                "test_date": "2020-10-17",
+                "age_60_and_above": "Yes",
+                "male": "643",
+                "female": "901",
+                "NULL": "0"
+            },
+            {
+                "_id": 40,
+                "test_date": "2020-10-18",
+                "age_60_and_above": "NULL",
+                "male": "297",
+                "female": "319",
+                "NULL": "61"
+            },
+            {
+                "_id": 41,
+                "test_date": "2020-10-18",
+                "age_60_and_above": "No",
+                "male": "9642",
+                "female": "13048",
+                "NULL": "17"
+            },
+            {
+                "_id": 42,
+                "test_date": "2020-10-18",
+                "age_60_and_above": "Yes",
+                "male": "1813",
+                "female": "2581",
+                "NULL": "2"
+            },
+            {
+                "_id": 43,
+                "test_date": "2020-10-19",
+                "age_60_and_above": "NULL",
+                "male": "228",
+                "female": "222",
+                "NULL": "39"
+            },
+            {
+                "_id": 44,
+                "test_date": "2020-10-19",
+                "age_60_and_above": "No",
+                "male": "10217",
+                "female": "10618",
+                "NULL": "58"
+            },
+            {
+                "_id": 45,
+                "test_date": "2020-10-19",
+                "age_60_and_above": "Yes",
+                "male": "2077",
+                "female": "2831",
+                "NULL": "6"
+            },
+            {
+                "_id": 46,
+                "test_date": "2020-10-20",
+                "age_60_and_above": "NULL",
+                "male": "275",
+                "female": "277",
+                "NULL": "39"
+            },
+            {
+                "_id": 47,
+                "test_date": "2020-10-20",
+                "age_60_and_above": "No",
+                "male": "11774",
+                "female": "9296",
+                "NULL": "25"
+            },
+            {
+                "_id": 48,
+                "test_date": "2020-10-20",
+                "age_60_and_above": "Yes",
+                "male": "1796",
+                "female": "2236",
+                "NULL": "128"
+            },
+            {
+                "_id": 49,
+                "test_date": "2020-10-21",
+                "age_60_and_above": "NULL",
+                "male": "264",
+                "female": "206",
+                "NULL": "21"
+            },
+            {
+                "_id": 50,
+                "test_date": "2020-10-21",
+                "age_60_and_above": "No",
+                "male": "11942",
+                "female": "9472",
+                "NULL": "48"
+            },
+            {
+                "_id": 51,
+                "test_date": "2020-10-21",
+                "age_60_and_above": "Yes",
+                "male": "1746",
+                "female": "2120",
+                "NULL": "3"
+            },
+            {
+                "_id": 52,
+                "test_date": "2020-10-22",
+                "age_60_and_above": "NULL",
+                "male": "306",
+                "female": "218",
+                "NULL": "20"
+            },
+            {
+                "_id": 53,
+                "test_date": "2020-10-22",
+                "age_60_and_above": "No",
+                "male": "9583",
+                "female": "8974",
+                "NULL": "34"
+            },
+            {
+                "_id": 54,
+                "test_date": "2020-10-22",
+                "age_60_and_above": "Yes",
+                "male": "1688",
+                "female": "2048",
+                "NULL": "1"
+            },
+            {
+                "_id": 55,
+                "test_date": "2020-10-23",
+                "age_60_and_above": "NULL",
+                "male": "247",
+                "female": "121",
+                "NULL": "22"
+            },
+            {
+                "_id": 56,
+                "test_date": "2020-10-23",
+                "age_60_and_above": "No",
+                "male": "5216",
+                "female": "4895",
+                "NULL": "8"
+            },
+            {
+                "_id": 57,
+                "test_date": "2020-10-23",
+                "age_60_and_above": "Yes",
+                "male": "1206",
+                "female": "1751",
+                "NULL": "2"
+            },
+            {
+                "_id": 58,
+                "test_date": "2020-10-24",
+                "age_60_and_above": "NULL",
+                "male": "61",
+                "female": "47",
+                "NULL": "1"
+            },
+            {
+                "_id": 59,
+                "test_date": "2020-10-24",
+                "age_60_and_above": "No",
+                "male": "2030",
+                "female": "2074",
+                "NULL": "3"
+            },
+            {
+                "_id": 60,
+                "test_date": "2020-10-24",
+                "age_60_and_above": "Yes",
+                "male": "405",
+                "female": "411",
+                "NULL": "0"
+            },
+            {
+                "_id": 61,
+                "test_date": "2020-10-25",
+                "age_60_and_above": "NULL",
+                "male": "362",
+                "female": "224",
+                "NULL": "47"
+            },
+            {
+                "_id": 62,
+                "test_date": "2020-10-25",
+                "age_60_and_above": "No",
+                "male": "10100",
+                "female": "7502",
+                "NULL": "18"
+            },
+            {
+                "_id": 63,
+                "test_date": "2020-10-25",
+                "age_60_and_above": "Yes",
+                "male": "1600",
+                "female": "1813",
+                "NULL": "3"
+            },
+            {
+                "_id": 64,
+                "test_date": "2020-10-26",
+                "age_60_and_above": "NULL",
+                "male": "254",
+                "female": "222",
+                "NULL": "44"
+            },
+            {
+                "_id": 65,
+                "test_date": "2020-10-26",
+                "age_60_and_above": "No",
+                "male": "10320",
+                "female": "8584",
+                "NULL": "41"
+            },
+            {
+                "_id": 66,
+                "test_date": "2020-10-26",
+                "age_60_and_above": "Yes",
+                "male": "1680",
+                "female": "1910",
+                "NULL": "61"
+            },
+            {
+                "_id": 67,
+                "test_date": "2020-10-27",
+                "age_60_and_above": "NULL",
+                "male": "300",
+                "female": "252",
+                "NULL": "31"
+            },
+            {
+                "_id": 68,
+                "test_date": "2020-10-27",
+                "age_60_and_above": "No",
+                "male": "8362",
+                "female": "8630",
+                "NULL": "20"
+            },
+            {
+                "_id": 69,
+                "test_date": "2020-10-27",
+                "age_60_and_above": "Yes",
+                "male": "1564",
+                "female": "1976",
+                "NULL": "3"
+            },
+            {
+                "_id": 70,
+                "test_date": "2020-10-28",
+                "age_60_and_above": "NULL",
+                "male": "242",
+                "female": "188",
+                "NULL": "36"
+            },
+            {
+                "_id": 71,
+                "test_date": "2020-10-28",
+                "age_60_and_above": "No",
+                "male": "7947",
+                "female": "10114",
+                "NULL": "19"
+            },
+            {
+                "_id": 72,
+                "test_date": "2020-10-28",
+                "age_60_and_above": "Yes",
+                "male": "1608",
+                "female": "1995",
+                "NULL": "2"
+            },
+            {
+                "_id": 73,
+                "test_date": "2020-10-29",
+                "age_60_and_above": "NULL",
+                "male": "431",
+                "female": "373",
+                "NULL": "40"
+            },
+            {
+                "_id": 74,
+                "test_date": "2020-10-29",
+                "age_60_and_above": "No",
+                "male": "8536",
+                "female": "11144",
+                "NULL": "27"
+            },
+            {
+                "_id": 75,
+                "test_date": "2020-10-29",
+                "age_60_and_above": "Yes",
+                "male": "1563",
+                "female": "2126",
+                "NULL": "1"
+            },
+            {
+                "_id": 76,
+                "test_date": "2020-10-30",
+                "age_60_and_above": "NULL",
+                "male": "144",
+                "female": "135",
+                "NULL": "2"
+            },
+            {
+                "_id": 77,
+                "test_date": "2020-10-30",
+                "age_60_and_above": "No",
+                "male": "5667",
+                "female": "8027",
+                "NULL": "8"
+            },
+            {
+                "_id": 78,
+                "test_date": "2020-10-30",
+                "age_60_and_above": "Yes",
+                "male": "1374",
+                "female": "1878",
+                "NULL": "11"
+            },
+            {
+                "_id": 79,
+                "test_date": "2020-10-31",
+                "age_60_and_above": "NULL",
+                "male": "95",
+                "female": "73",
+                "NULL": "1"
+            },
+            {
+                "_id": 80,
+                "test_date": "2020-10-31",
+                "age_60_and_above": "No",
+                "male": "1960",
+                "female": "2671",
+                "NULL": "12"
+            },
+            {
+                "_id": 81,
+                "test_date": "2020-10-31",
+                "age_60_and_above": "Yes",
+                "male": "381",
+                "female": "389",
+                "NULL": "0"
+            },
+            {
+                "_id": 82,
+                "test_date": "2020-11-01",
+                "age_60_and_above": "NULL",
+                "male": "283",
+                "female": "154",
+                "NULL": "22"
+            },
+            {
+                "_id": 83,
+                "test_date": "2020-11-01",
+                "age_60_and_above": "No",
+                "male": "8314",
+                "female": "8797",
+                "NULL": "7"
+            },
+            {
+                "_id": 84,
+                "test_date": "2020-11-01",
+                "age_60_and_above": "Yes",
+                "male": "1491",
+                "female": "1587",
+                "NULL": "1"
+            }
+        ],
+        "limit": 100,
+        "_links": {
+            "start": "/api/3/action/datastore_search?limit=100&include_total=True&resource_id=09e66a69-ad5b-4c46-a5d9-1d1479b1f338",
+            "next": "/api/3/action/datastore_search?offset=100&limit=100&include_total=True&resource_id=09e66a69-ad5b-4c46-a5d9-1d1479b1f338"
+        },
+        "total": 84
+    }
+}
