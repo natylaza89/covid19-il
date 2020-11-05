@@ -6,7 +6,7 @@ from covid19_il.data_handler.data_handlers.area import Area
 from covid19_il.data_handler.data_handlers.quarantine import Quarantine
 from covid19_il.data_handler.data_handlers.lab_tests import LabTests
 from covid19_il.data_handler.data_handlers.tested_individuals import TestedIndividuals
-# TODO: resource id 5
+from covid19_il.data_handler.data_handlers.tested_individuals_scores import TestedIndividualsScores
 from covid19_il.data_handler.data_handlers.recovered import Recovered
 from covid19_il.data_handler.data_handlers.hospitalized import Hospitalized
 from covid19_il.data_handler.data_handlers.age_gender import AgeGender
@@ -76,7 +76,7 @@ class DataHandlerFactory:
             2: Quarantine(Logger().logger, json_data),
             3: LabTests(Logger().logger, json_data),
             4: TestedIndividuals(Logger().logger, json_data),
-            # TODO: 5: TestedIndividualsScores(Logger().logger, json_data),
+            5: TestedIndividualsScores(Logger().logger, json_data),
             6: Recovered(Logger().logger, json_data),
             7: Hospitalized(Logger().logger, json_data),
             8: AgeGender(Logger().logger, json_data),
