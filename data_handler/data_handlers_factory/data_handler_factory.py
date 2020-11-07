@@ -71,19 +71,21 @@ class DataHandlerFactory:
             DataHandler or None: data handler's class instance or None object.
 
         """
+
+        logger = Logger().logger
         switch_case = {
-            1: Area(Logger().logger, json_data),
-            2: Quarantine(Logger().logger, json_data),
-            3: LabTests(Logger().logger, json_data),
-            4: TestedIndividuals(Logger().logger, json_data),
-            5: TestedIndividualsScores(Logger().logger, json_data),
-            6: Recovered(Logger().logger, json_data),
-            7: Hospitalized(Logger().logger, json_data),
-            8: AgeGender(Logger().logger, json_data),
-            9: MedicalStaffMorbidity(Logger().logger, json_data),
-            10: Deaths(Logger().logger, json_data),
-            11: YoungPopulation(Logger().logger, json_data),
-            12: Cities(Logger().logger, json_data),
+            1: Area(logger, json_data),
+            2: Quarantine(logger, json_data),
+            3: LabTests(logger, json_data),
+            4: TestedIndividuals(logger, json_data),
+            5: TestedIndividualsScores(logger, json_data),
+            6: Recovered(logger, json_data),
+            7: Hospitalized(logger, json_data),
+            8: AgeGender(logger, json_data),
+            9: MedicalStaffMorbidity(logger, json_data),
+            10: Deaths(logger, json_data),
+            11: YoungPopulation(logger, json_data),
+            12: Cities(logger, json_data),
             "default": None
         }
         return switch_case.get(required_resource_id.value, switch_case['default'])
