@@ -34,9 +34,10 @@ class ApiFactory:
         if not isinstance(required_api, ApiEnum):
             raise TypeError("Not Api Enum Type")
 
+        logger = Logger().logger
         switch_case = {
-            1: ApiDataIL(Logger().logger),
-            2: ApiDataGlobal(Logger().logger),
+            1: ApiDataIL(logger),
+            2: ApiDataGlobal(logger),
             "default": None
         }
 
