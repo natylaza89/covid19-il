@@ -28,11 +28,11 @@ class ApiDataIL(IAPIHandler):
     def __init__(self, logger) -> None:
         load_dotenv()
         self._logger = logger
+        self._logger.info("Created ApiDataIL API Client")
         self._base_url = os.getenv("API_DATA_GOV_IL_URL")
         self._url_query = None
         self._json_data = None
         self._request_status = None
-        self._logger.info(f"Created ApiDataIL: logger({self._logger})")
 
     def __repr__(self) -> str:
         """ Returns Class Representation """
@@ -62,6 +62,8 @@ class ApiDataIL(IAPIHandler):
     def url_query(self, required_url_query: str) -> None:
         if required_url_query is not None and isinstance(required_url_query, str):
             self._url_query = required_url_query
+            self._logger.debug(f"url query is: {self._url_query}")
+
         else:
             self._logger.exception(f"Wrong Type - {type(required_url_query)} is not a string")
             raise TypeError("Wrong Type - not a string for a query")
@@ -76,6 +78,8 @@ class ApiDataIL(IAPIHandler):
     def json_data(self, fetched_json_data: dict) -> None:
         if fetched_json_data is not None and isinstance(fetched_json_data, dict):
             self._json_data = fetched_json_data
+            self._logger.debug(f"json data is : {self._json_data}")
+
         else:
             self._logger.exception(f"Wrong Type - {type(fetched_json_data)} is not a json data dict")
             raise TypeError("Wrong Type - not a dict for a json data")
@@ -95,12 +99,9 @@ class ApiDataIL(IAPIHandler):
         Returns:
             self._request_status(int): http get request's status code.
 
-        Raises:
-            HTTPError, SSLError, InvalidURL, ConnectTimeout, ConnectionError, Timeout, RequestException,
-            MissingSchema: concrete error which can occurred.
-            Exception: general error which can occurred.
          """
 
+        self._logger.info("starting api data il's get request.")
         try:
             request_result = requests.get(self._url_query)
             self._request_status = request_result.status_code
@@ -112,6 +113,8 @@ class ApiDataIL(IAPIHandler):
         except Exception as general_error:
             self._logger.exception(general_error)
         finally:
+            self._logger.debug(f"api data il's get requests succeeded with {self._request_status} code.")
+            self._logger.info("finished api data il's get request.")
             return self._request_status
 
     def _build_url_query_by_parameters(self,
@@ -134,6 +137,7 @@ class ApiDataIL(IAPIHandler):
             None.
         """
 
+        self._logger.info("trying to build api data il's url query.")
         self._url_query = f"{self._base_url}/api/3/action/datastore_search?" \
                           f"resource_id={os.getenv(enum_resource_id.name)}"
         if limit:
@@ -145,7 +149,8 @@ class ApiDataIL(IAPIHandler):
         if query:
             self._url_query += f"&q={query}"
 
-        self._logger.info(f"url_query = {self._url_query}")
+        self._logger.debug(f"api client's url_query = {self._url_query}")
+        self._logger.info("finished building api data il's url query.")
 
     def get_data_by_resource_id(self,
                                 enum_resource_id: ResourceId,
@@ -166,9 +171,8 @@ class ApiDataIL(IAPIHandler):
         Returns:
             self._json_data(dict): returns a dictionary of get request's result.
         """
+
         self._build_url_query_by_parameters(enum_resource_id, limit, offset, include_total, query)
-        status_code = self._get_request()
-        self._logger.debug(f"status code is {status_code}, and value returned is equal to object attribute: "
-                           f"{status_code == self._request_status}")
+        _ = self._get_request()
 
         return self._json_data
