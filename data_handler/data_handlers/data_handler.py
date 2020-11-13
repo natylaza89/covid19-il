@@ -36,7 +36,7 @@ class DataHandler(ABC):
         self._logger = logger
         self._main_data = json_data
         self._df = self._convert_json_to_data_frame()
-        self._total_number = None
+        self._total_number = json_data['result']['total'] if not None else None
 
     def __repr__(self) -> str:
         """ Class Representation """
@@ -56,6 +56,10 @@ class DataHandler(ABC):
     def logger(self) -> Logger.logger:
         """ Logger.logger: Returns the Logger object """
         return self._logger
+
+    @logger.setter
+    def logger(self, new_logger) -> None:
+        self._logger = new_logger
 
     @property
     def main_data(self) -> dict:
