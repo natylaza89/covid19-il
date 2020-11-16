@@ -1,5 +1,3 @@
-import os
-from dotenv import load_dotenv
 import requests
 from requests.exceptions import (HTTPError, SSLError, InvalidURL, ConnectTimeout, ConnectionError, Timeout,
                                  RequestException, MissingSchema)
@@ -8,6 +6,7 @@ from typing import Dict
 from covid19_il.api_handler.iapi_handler import IAPIHandler
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.enums.resource_id import ResourceId
+import covid19_il.api_handler.consts as api_consts
 
 
 class ApiDataIL(IAPIHandler):
@@ -19,17 +18,12 @@ class ApiDataIL(IAPIHandler):
         _url_query(str): final url query for http get request
         _json_data(dict): http get request's results dictionary
         _request_status(int): http get request's results status
-
-    Todo:
-        * storing next & previous url query with offset jumps
-
     """
 
     def __init__(self, logger) -> None:
-        load_dotenv()
         self._logger = logger
         self._logger.info("Created ApiDataIL API Client")
-        self._base_url = os.getenv("API_DATA_GOV_IL_URL")
+        self._base_url = api_consts.API_DATA_GOV_IL_URL
         self._url_query = None
         self._json_data = None
         self._request_status = None
@@ -139,7 +133,7 @@ class ApiDataIL(IAPIHandler):
 
         self._logger.info("trying to build api data il's url query.")
         self._url_query = f"{self._base_url}/api/3/action/datastore_search?" \
-                          f"resource_id={os.getenv(enum_resource_id.name)}"
+                          f"resource_id={api_consts.db[enum_resource_id.name]}"
         if limit:
             self._url_query += f"&limit={limit}"
         if offset:
