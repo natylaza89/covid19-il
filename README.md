@@ -1,4 +1,4 @@
-![covid19_il](https://github.com/natylaza89/covid19_il/blob/main/pic/covid19_il_banner.png)
+![covid19_il](https://raw.githubusercontent.com/natylaza89/covid19_il/main/pic/covid19_il_banner.png)
 
 # covid19_il
 python package which brings a "Facade" interface for using official covid19 israeli data gov's data.
