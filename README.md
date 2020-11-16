@@ -1,29 +1,45 @@
-##### ...picture...
+![covid19_il](https://github.com/natylaza89/covid19_il/blob/main/pic/covid19_il.png)
 
 # covid19_il
 python package which brings a "Facade" interface for using official covid19 israeli data gov's data.
 
-## *** This project is under construction and gets update almost daily. ***
-
-
 ## Dependencies
 1. pandas
 2. numpy
-3. ...
-4. ...
+3. requests
 
 ## How to Use
 Requirements: Python must already be installed.
-1. Run Application via CMD:
+1. Install requirements via CMD/Terminal:
+```
+pip install -r requirements.txt
+```
+2. Install covid19_il package via CMD/Terminal:
 ```
 pip install covid19_il
 ```
-2. more steps...
+
+## How to Use
+Requirements: Python must already be installed.
+1. Install requirements via CMD/Terminal:
+```
+from covid19_il.api_handler.api_factory.api_enum import ApiEnum
+from covid19_il.api_handler.api_factory.api_factory import ApiFactory
+from covid19_il.data_handler.data_handlers_factory.data_handler_factory import DataHandlerFactory
+from covid19_il.data_handler.enums.resource_id import ResourceId
+
+
+api_client = ApiFactory.create_api_client(ApiEnum.api_data_il)
+if api_client:
+    data = api_client.get_data_by_resource_id(enum_resource_id=ResourceId.CITIES_POPULATION_RESOURCE_ID,
+                                                limit=1000,
+                                                include_total=True)
+    cities_data_handler = DataHandlerFactory.get_instance(
+        ResourceId.CITIES_POPULATION_RESOURCE_ID,
+        data)
+    cities_top_cases_results = cities_data_handler.top_cases_in_cities_by_date('2020-11-01')
+    print(cities_top_cases_results)
+```
 
 ## # TODO:
-1. Data Handlers for all israeli data gov's data bases 
-2. Finish TODO section in api handler
-3. Finish TODO section in logger
-4. Finish Tests.
-5. Create & Arrange all files for package creation.
-6. publish package via PyPi.
+1. Documentation of the package's API for ease of use.
