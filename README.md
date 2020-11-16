@@ -19,9 +19,8 @@ pip install -r requirements.txt
 pip install covid19_il
 ```
 
-## How to Use
-Requirements: Python must already be installed.
-1. Install requirements via CMD/Terminal:
+## Example
+Simple example of using the package's API:
 ```
 from covid19_il.api_handler.api_factory.api_enum import ApiEnum
 from covid19_il.api_handler.api_factory.api_factory import ApiFactory
@@ -41,5 +40,10 @@ if api_client:
     print(cities_top_cases_results)
 ```
 
+Output:
+```
+defaultdict(<function Cities._get_top_cases_statistics.<locals>.<lambda> at 0x040A6460>, {'Cumulative_verified_cases': defaultdict(<class 'int'>, {'אבו סנאן': 577, 'אבו גוש': 217, "אבו ג'ווייעד (שבט)": 14, 'אבו קורינאת (שבט)': 14}), 'Cumulated_recovered': defaultdict(<class 'int'>, {'אבו סנאן': 548, 'אבו גוש': 212, "אבו ג'ווייעד (שבט)": 14, 'אבו קורינאת (שבט)': 0}), 'Cumulated_deaths': defaultdict(<class 'int'>, {'אבו סנאן': 14, "אבו ג'ווייעד (שבט)": 0, 'אבו גוש': 0, 'אבו קורינאת (שבט)': 0}), 'Cumulated_number_of_tests': defaultdict(<class 'int'>, {'אבו סנאן': 7292, 'אבו גוש': 4836, 'אבו קורינאת (שבט)': 363, "אבו ג'ווייעד (שבט)": 271}), 'Cumulated_number_of_diagnostic_tests': defaultdict(<class 'int'>, {'אבו סנאן': 6828, 'אבו גוש': 4676, 'אבו קורינאת (שבט)': 363, "אבו ג'ווייעד (שבט)": 269})})
+
+```
 ## # TODO:
 1. Documentation of the package's API for ease of use.
