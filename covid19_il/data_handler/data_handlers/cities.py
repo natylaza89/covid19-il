@@ -1,7 +1,7 @@
 from collections import namedtuple, defaultdict
 from datetime import datetime as dt
 from functools import lru_cache
-from typing import Dict, NamedTuple, Tuple, DefaultDict, AnyStr, Generator, Union
+from typing import Dict, NamedTuple, Tuple, DefaultDict, AnyStr, Generator
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
