@@ -3,7 +3,7 @@
 # covid19-il
 python package which brings a "Facade" interface for using official covid19 israeli data gov's data.
 
-<p align="center">
+<div align="center">
 
 [![Stars](https://img.shields.io/github/stars/natylaza89/covid19-il?style=social)](https://pepy.tech/project/covid19-il)
 [![Forks](https://img.shields.io/github/forks/natylaza89/covid19-il?style=social)](https://pepy.tech/project/covid19-il)
@@ -13,7 +13,7 @@ python package which brings a "Facade" interface for using official covid19 isra
 [![Package Status](https://img.shields.io/pypi/status/pandas.svg)](https://pypi.org/project/covid19-il/)
 [![Downloads](https://img.shields.io/pypi/dm/covid19-il)](https://pepy.tech/project/covid19-il)
 [![License](https://img.shields.io/pypi/l/covid19-il.svg)](https://github.com/natylaza89/covid19_il/blob/main/LICENSE)
-</p>
+</div>
 
 ## Dependencies
 1. pandas
