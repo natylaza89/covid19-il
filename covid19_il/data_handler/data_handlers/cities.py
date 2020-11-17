@@ -1,7 +1,7 @@
 from collections import namedtuple, defaultdict
 from datetime import datetime as dt
 from functools import lru_cache
-from typing import Dict, NamedTuple, Tuple, DefaultDict, AnyStr, Generator
+from typing import Dict, NamedTuple, Tuple, DefaultDict, AnyStr, Generator, Union
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -19,7 +19,7 @@ class Cities(DataHandler):
             data, it yields "No Data" string as bad result.
         _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]): Helper Method of other class's method for
             calculation.
-        top_10_cases_in_cities(self): returns top 10 cities with 5 calculated properties.
+        top_cases_in_cities(self): Returns top cities with 5 calculated properties or "No Data" as bad result.
         cases_statistics(self): returns cases statistics.
 
     """
@@ -58,25 +58,25 @@ class Cities(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            if len(data_dict):
+            if bool(data_dict):
                 for city in data_dict.items():
                     yield city
             else:
                 yield "No Data"
 
-    def _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]) -> DefaultDict[str, DefaultDict[str, int]]:
-        """ Helper Method of other class's method for calculation.
+    def _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]) \
+            -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
+        """ Helper Method of top_cases_in_cities method for calculation & data manipulation.
 
         Note:
-            private method which get called by get_data_by_event_type's method.
+            private method which get called by top_cases_in_cities's method.
         Args:
-            cities_fields(str): today's date as a string.
+            None.
 
         Returns:
-            data_dict(DefaultDict[str, DefaultDict[str, int]]): top cities statistics data holder.
+            data_dict(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
+                top cities statistics data holder or "No Data" as bad result.
 
-        Raises:
-            KeyError: concrete error which can occurred if data frame can't be access by given key.
         """
 
         data_dict = None
@@ -97,25 +97,31 @@ class Cities(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                for city in data_dict.items():
+                    yield city
+            else:
+                yield "No Data"
 
     @lru_cache
-    def top_cases_in_cities(self) -> DefaultDict[str, DefaultDict[str, int]]:
-        """ Returns top 10 cities with 5 calculated properties.
+    def top_cases_in_cities(self)\
+            -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
+        """ Returns top cities with 5 calculated properties or "No Data" as bad result.
 
         Args:
             None.
 
         Returns:
-            _(DefaultDict[str, DefaultDict[str, int]]): top cities statistics data holder.
+            _(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
+                top cities statistics data holder or "No Data" as bad result.
 
         """
 
         return self._get_top_cases_statistics(Cities.fields[3:])
 
     @lru_cache
-    def cases_statistics(self) -> Dict[str, Dict[str, int or float]]:
-        """ Returns cases statistics.
+    def cases_statistics(self) -> Generator[Dict[str, Dict[str, int or float]]]:
+        """ Returns cases statistics .
 
         Note:
             use inherited methods from base class.
@@ -123,7 +129,7 @@ class Cities(DataHandler):
             None.
 
         Returns:
-            _(DefaultDict[str, DefaultDict[str, int]]): top cities statistics data holder.
+            _(Generator[Dict[str, Dict[str, int or float]]]): top cities statistics data holder generator.
 
         """
 
