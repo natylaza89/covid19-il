@@ -120,7 +120,8 @@ class Cities(DataHandler):
         return self._get_top_cases_statistics(Cities.fields[3:])
 
     @lru_cache
-    def cases_statistics(self) -> Generator[Dict[str, Dict[str, int or float]]]:
+    def cases_statistics(self) \
+            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]:
         """ Returns cases statistics .
 
         Note:
