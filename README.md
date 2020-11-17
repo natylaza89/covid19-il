@@ -1,14 +1,19 @@
 ![covid19-il](https://raw.githubusercontent.com/natylaza89/covid19_il/main/pic/covid19_il_banner.png)
 
-# covid19_il
+# covid19-il
 python package which brings a "Facade" interface for using official covid19 israeli data gov's data.
 
-[![PyPI Latest Release](https://img.shields.io/pypi/v/pandas.svg)](https://pypi.org/project/covid19-il/)
+<div align="center">
+
+[![Stars](https://img.shields.io/github/stars/natylaza89/covid19-il?style=social)](https://pepy.tech/project/covid19-il)
+[![Forks](https://img.shields.io/github/forks/natylaza89/covid19-il?style=social)](https://pepy.tech/project/covid19-il)
+
+[![LastCommit](https://img.shields.io/github/last-commit/natylaza89/covid19-il/main)](https://pepy.tech/project/covid19-il)
+[![PyPI Latest Release](https://img.shields.io/pypi/v/covid19-il.svg)](https://pypi.org/project/covid19-il/)
 [![Package Status](https://img.shields.io/pypi/status/pandas.svg)](https://pypi.org/project/covid19-il/)
-[![Downloads](https://anaconda.org/conda-forge/pandas/badges/downloads.svg)](https://pepy.tech/project/covoid19-il)
-[![License](https://img.shields.io/pypi/l/pandas.svg)](https://github.com/natylaza89/covid19_il/blob/main/LICENSE)
-
-
+[![Downloads](https://img.shields.io/pypi/dm/covid19-il)](https://pepy.tech/project/covid19-il)
+[![License](https://img.shields.io/pypi/l/covid19-il.svg)](https://github.com/natylaza89/covid19_il/blob/main/LICENSE)
+</div>
 
 ## Dependencies
 1. pandas
@@ -43,8 +48,9 @@ if api_client:
     cities_data_handler = DataHandlerFactory.get_instance(
         ResourceId.CITIES_POPULATION_RESOURCE_ID,
         data)
-    cities_top_cases_results = cities_data_handler.top_cases_in_cities_by_date('2020-11-01')
-    print(cities_top_cases_results)
+    # Printing results from a generator function
+    for city in cities_data_handler.top_cases_in_cities_by_date('2020-11-01'):
+        print(city)
 ```
 
 Output:
