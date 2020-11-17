@@ -63,6 +63,6 @@ Output:
 ('Cumulated_number_of_diagnostic_tests', defaultdict(<class 'int'>, {'אבו סנאן': 7130, 'אבו גוש': 4965, "אבו ג'ווייעד (שבט)": 288}))
 ```
 ## # TODO:
-1. Refactor all methods returning type & value to a generator instead of a data type.0
+1. Refactor all methods returning type & value to a generator instead of a data type.
 2. refactor all tests according step 1.
 2. Documentation of the package's API for ease of use using Sphinx.
