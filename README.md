@@ -1,11 +1,11 @@
-![covid19-il](https://raw.githubusercontent.com/natylaza89/covid19_il/main/pic/covid19_il_banner.png)
+![covid19_il](https://raw.githubusercontent.com/natylaza89/covid19_il/main/pic/covid19_il_banner.png)
 
 # covid19_il
 python package which brings a "Facade" interface for using official covid19 israeli data gov's data.
 
 [![PyPI Latest Release](https://img.shields.io/pypi/v/pandas.svg)](https://pypi.org/project/covid19-il/)
 [![Package Status](https://img.shields.io/pypi/status/pandas.svg)](https://pypi.org/project/covid19-il/)
-[![Downloads](https://anaconda.org/conda-forge/pandas/badges/downloads.svg)](https://pepy.tech/project/covoid19-il)
+[![Downloads](https://anaconda.org/conda-forge/pandas/badges/downloads.svg)](https://pepy.tech/project/covid19-il)
 [![License](https://img.shields.io/pypi/l/pandas.svg)](https://github.com/natylaza89/covid19_il/blob/main/LICENSE)
 
 
@@ -21,9 +21,9 @@ Requirements: Python must already be installed.
 ```
 pip install -r requirements.txt
 ```
-2. Install covid19-il package via CMD/Terminal:
+2. Install covid19_il package via CMD/Terminal:
 ```
-pip install covid19-il
+pip install covid19_il
 ```
 
 ## Example
