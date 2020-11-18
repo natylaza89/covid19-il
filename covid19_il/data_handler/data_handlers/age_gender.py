@@ -40,7 +40,7 @@ class AgeGender(DataHandler):
             None.
 
         Yields:
-            DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data inside data
+            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data inside data
                 holder as generator or "No Data" as bad result.
 
         """
@@ -59,7 +59,7 @@ class AgeGender(DataHandler):
             columns_names(Tuple): required columns name of data frames for data manipulations.
 
         Yields:
-            DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data inside data holder as
+            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]] or str: desired data inside data holder as
                 generator or "No Data" as bad result.
 
         """
@@ -92,7 +92,7 @@ class AgeGender(DataHandler):
             week_day(str): given week day for data manipulation.
 
         Yields:
-            Dict[str, Dict[str, str]] or str: desired data as generator or "No Data" for bad result.
+            Tuple[str, Dict[str, Dict[str, str]] or str: desired data as generator or "No Data" for bad result.
 
         """
 
@@ -117,14 +117,14 @@ class AgeGender(DataHandler):
 
     @lru_cache
     def statistics_by_age_group(self) \
-            -> Generator[DefaultDict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]:
+            -> Generator[DefaultDict[str, DefaultDict[str, Dict[str, int or float]]], None, None] or Generator[str, None, None]:
         """ Yields a generator which includes statistic of calculated fields by ordered by age group.
 
         Args:
             None.
 
         Yields:
-            Dict[str, int or float] or str: desired data inside data holder as a generator or "No Data" for bad result.
+            Tuple[str, [DefaultDict[str, Dict[str, int or float]] or str: desired data inside data holder as a generator or "No Data" for bad result.
 
         """
 
