@@ -13,16 +13,14 @@ class Deaths(DataHandler):
         None.
 
     Methods:
-        amount_of_deaths(self): Return amount of deaths in  data holder.
-        amount_of_ventilated(self): returns amount of ventilated/unventilated by age group & gender.
-        _get_data_by_column(self, group_by_column: str, ascending_order: bool = False): return amount of given column
-            grouped by age group as a generator.
-        time_between_positive_and_hospitalization(self): returns a generator which includes amount of time between
-            positive and hospitalization by age group & gender.
-        length_of_hospitalization(self): returns a generator which includes length of hospitalization's amount by age
-            group & gender.
-        time_between_positive_and_death(self): returns a generator which includes time between positive and death
-            amount by age group & gender.
+        amount_of_deaths(self): Yields amount of deaths data.
+        amount_of_ventilated(self): Yields amount of ventilated/unventilated by age group & gender data.
+        _get_data_by_column(self, group_by_column: str, ascending_order: bool = False): Yields amount of given column
+            grouped by age group data
+        time_between_positive_and_hospitalization(self): Yields amount of time between positive and hospitalization by
+            age group & gender data.
+        length_of_hospitalization(self): Yields length of hospitalization's amount by age group & gender data.
+        time_between_positive_and_death(self): Yields time between positive and death amount by age group & gender data.
 
     """
 
@@ -33,14 +31,13 @@ class Deaths(DataHandler):
     @lru_cache
     def amount_of_deaths(self) \
             -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
-        """ Return amount of deaths in data holder as a generator.
+        """ Yields amount of deaths data.
 
         Args:
             None.
 
-        Returns:
-            data_dict(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                desired data in data holder as a generator or a "No Data" for bad result.
+        Yields:
+            Tuple[str, DefaultDict[str, int]] or str: desired data or a "No Data" string for bad result.
 
         """
 
@@ -64,17 +61,16 @@ class Deaths(DataHandler):
                 yield "No Data"
 
     @lru_cache
-    def amount_of_ventilated(self)  -> \
+    def amount_of_ventilated(self) -> \
             Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or \
             Generator[str, None, None]:
-        """ Returns amount of ventilated/unventilated by age group & gender as a generator.
+        """ Yields amount of ventilated/unventilated by age group & gender data.
 
         Args:
             None.
 
-        Returns:
-            _(Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or \
-                Generator[str, None, None]): desired data in data holder as a generator.
+        Yields:
+            Tuple[str, DefaultDict[str, DefaultDict[str, int]]] or str: desired data or "No Data" for bad result.
 
         """
 
@@ -82,7 +78,7 @@ class Deaths(DataHandler):
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) \
             -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
-        """ Return amount of given column grouped by age group as a generator.
+        """ Yields amount of given column grouped by age group data.
 
         Note:
             private methods which get called by other methods for calculation.
@@ -91,9 +87,8 @@ class Deaths(DataHandler):
             group_by_column(str): column name of event type.
             ascending_order(bool): final result's ordering by de/ascending.
 
-        Returns:
-            data_dict(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                desired data in data holder as a generator or "No Data" for bad result.
+        Yields:
+             Tuple[str, DefaultDict[str, int]] or str: desired data or "No Data" for bad result.
 
         """
 
@@ -119,14 +114,13 @@ class Deaths(DataHandler):
     @lru_cache
     def time_between_positive_and_hospitalization(self) \
             -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes amount of time between positive and hospitalization by age group & gender.
+        """ Yields amount of time between positive and hospitalization by age group & gender data.
 
         Args:
             None.
 
-        Returns:
-            _(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                desired data in data holder as a generator or "No Data" for bad result.
+        Yields:
+             Tuple[str, DefaultDict[str, int]] or str: desired data or "No Data" for bad result.
 
         """
 
@@ -135,14 +129,13 @@ class Deaths(DataHandler):
     @lru_cache
     def length_of_hospitalization(self) \
             -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes length of hospitalization's amount by age group & gender.
+        """ Yields length of hospitalization's amount by age group & gender data.
 
         Args:
             None.
 
-        Returns:
-            _(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                desired data in data holder as a generator or "No Data" for bad result.
+       Yields:
+             Tuple[str, DefaultDict[str, int]] or str: desired data or "No Data" for bad result.
 
         """
 
@@ -151,14 +144,13 @@ class Deaths(DataHandler):
     @lru_cache
     def time_between_positive_and_death(self) \
             -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes time between positive and death amount by age group & gender.
+        """ Yields time between positive and death amount by age group & gender data.
 
         Args:
             None.
 
-        Returns:
-            _(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                desired data in data holder as a generator or "No Data" for bad result.
+        Yields:
+             Tuple[str, DefaultDict[str, int]] or str: desired data or "No Data" for bad result.
 
         """
 
