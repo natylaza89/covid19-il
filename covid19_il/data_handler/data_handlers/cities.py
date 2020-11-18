@@ -14,13 +14,13 @@ class Cities(DataHandler):
         None.
 
     Methods:
-        cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): Returns calculated cities as a
-            generator of namedtuple with city's data props via given date in format ike: '2020-10-03'. if it has no
-            data, it yields "No Data" string as bad result.
+        cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): Yields calculated cities of
+            namedtuple with city's data props via given date in format like: '2020-10-03'.
+            if it has no data, it yields "No Data" string as bad result.
         _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]): Helper Method of other class's method for
             calculation.
-        top_cases_in_cities(self): Returns top cities with 5 calculated properties or "No Data" as bad result.
-        cases_statistics(self): returns cases statistics.
+        top_cases_in_cities(self): Yields top cities with 5 calculated properties or "No Data" as bad result.
+        cases_statistics(self): Yields cases statistics.
 
     """
 
@@ -35,14 +35,14 @@ class Cities(DataHandler):
     @lru_cache(maxsize=None)
     def cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")) \
             -> Generator[NamedTuple, None, None] or Generator[str, None, None]:
-        """ Returns calculated cities as a generator of namedtuple with city's data props via given date in format
+        """ Yields calculated cities of namedtuple with city's data props via given date in format
             like: '2020-10-03'. if it has no data, it yields "No Data" string as bad result.
 
         Args:
             date(str): today's date as a string.
 
-        Returns:
-            data_dict(dict or none): cities by date data stored in a dictionary.
+        Yields:
+            NamedTuple[str, str]: city's data as namedtuple.
 
         """
 
@@ -73,9 +73,8 @@ class Cities(DataHandler):
         Args:
             None.
 
-        Returns:
-            data_dict(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                top cities statistics data holder or "No Data" as bad result.
+        Yields:
+             Tuple[str, DefaultDict[str, int]] or str: top cities statistics data holder or "No Data" as bad result.
 
         """
 
@@ -98,22 +97,21 @@ class Cities(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for city in data_dict.items():
-                    yield city
+                for item in data_dict.items():
+                    yield item
             else:
                 yield "No Data"
 
     @lru_cache
     def top_cases_in_cities(self)\
             -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
-        """ Returns top cities with 5 calculated properties or "No Data" as bad result.
+        """ Yields top cities with 5 calculated properties or "No Data" as bad result.
 
         Args:
             None.
 
-        Returns:
-            _(Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]):
-                top cities statistics data holder or "No Data" as bad result.
+        Yields:
+           Tuple[str, DefaultDict[str, int]] or str: top cities statistics data or "No Data" as bad result.
 
         """
 
@@ -122,7 +120,7 @@ class Cities(DataHandler):
     @lru_cache
     def cases_statistics(self) \
             -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]:
-        """ Returns cases statistics .
+        """ Yields cases statistics.
 
         Note:
             use inherited methods from base class.
@@ -130,7 +128,7 @@ class Cities(DataHandler):
             None.
 
         Returns:
-            _(Generator[Dict[str, Dict[str, int or float]]]): top cities statistics data holder generator.
+            Tuple[str, Dict[str, int or float]] or str): top cities statistics data holder or "No Data" for bad result.
 
         """
 
