@@ -81,8 +81,8 @@ class Hospitalized(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for city in data_dict.items():
-                    yield city
+                for item in data_dict.items():
+                    yield item
             else:
                 yield "No Data"
 
@@ -119,7 +119,7 @@ class Hospitalized(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for city in data_dict.items():
-                    yield city
+                for item in data_dict.items():
+                    yield item
             else:
                 yield "No Data"
