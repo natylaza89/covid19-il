@@ -40,8 +40,8 @@ class AgeGender(DataHandler):
             None.
 
         Yields:
-            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data inside data
-                holder as generator or "No Data" as bad result.
+            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data or "No Data" as
+                bad result.
 
         """
 
@@ -59,8 +59,8 @@ class AgeGender(DataHandler):
             columns_names(Tuple): required columns name of data frames for data manipulations.
 
         Yields:
-            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]] or str: desired data inside data holder as
-                generator or "No Data" as bad result.
+            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]] or str: desired data or "No Data" as
+                bad result.
 
         """
 
@@ -92,7 +92,7 @@ class AgeGender(DataHandler):
             week_day(str): given week day for data manipulation.
 
         Yields:
-            Tuple[str, Dict[str, Dict[str, str]] or str: desired data as generator or "No Data" for bad result.
+            Tuple[str, Dict[str, Dict[str, str]] or str: desired data or "No Data" for bad result.
 
         """
 
@@ -124,8 +124,7 @@ class AgeGender(DataHandler):
             None.
 
         Yields:
-            Tuple[str, [DefaultDict[str, Dict[str, int or float]] or str: desired data inside data holder as a generator or "No Data" for bad result.
-
+            Tuple[str, [DefaultDict[str, Dict[str, int or float]] or str: desired data or "No Data" for bad result.
         """
 
         data_dict = None
