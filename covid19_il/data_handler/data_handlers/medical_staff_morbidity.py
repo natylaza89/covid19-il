@@ -1,7 +1,7 @@
 from collections import defaultdict
 from functools import lru_cache
 import re
-from typing import Dict, Tuple, Any
+from typing import Dict, Tuple, Any, Generator
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -38,8 +38,8 @@ class MedicalStaffMorbidity(DataHandler):
         super().__init__(logger, json_data)
 
     def _get_data_by_columns(self, required_columns_names: Tuple[str, str, str], ascending_order: bool = False)\
-            -> Dict[str, Dict[str, Any]]:
-        """ Returns dictionary of dictionary with data for data of isolated/confirmed cases.
+            -> Generator[Dict[str, Dict[str, Any]], None, None] or Generator[str, None, None]:
+        """ Returns a generator which includes dictionary of dictionary with data for data of isolated/confirmed cases.
 
         Note:
             private method which get called other methods for data manipulation by columns.
@@ -49,7 +49,7 @@ class MedicalStaffMorbidity(DataHandler):
             ascending_order(bool): final results order in de/ascending.
 
         Returns:
-            data_dict(Dict[str, Dict[str, Any]]): desired data by date inside a dictionary.
+            data_dict(Generator[Dict[str, Dict[str, Any]], None, None] or Generator[str, None, None]): desired data by date as a generator.
 
         """
 
@@ -59,14 +59,19 @@ class MedicalStaffMorbidity(DataHandler):
             ser = df.groupby(['Date', *required_columns_names])['Date']
             data = ser.unique()
             data_dict = defaultdict(lambda: dict())
-            for key, value in data.items():
-                data_dict[key[0]] = \
-                    {column_name: data for (column_name, data) in zip(required_columns_names, key[1:])}
 
+            for key, value in data.items():
+                data_dict[key[0]] = {column_name: data for (column_name, data) in zip(required_columns_names, key[1:])}
+
+            data_dict = {key: value for (key, value) in sorted(data_dict.items(), reverse=ascending_order)}
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return {key: value for (key, value) in sorted(data_dict.items(), reverse=ascending_order)}
+            if bool(data_dict):
+                for item in data_dict.items():
+                    yield item
+            else:
+                yield "No Data"
 
     @lru_cache
     def confirmed_cases(self) -> Dict[str, Dict[str, int or str]]:

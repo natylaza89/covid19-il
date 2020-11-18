@@ -13,13 +13,13 @@ class AgeGender(DataHandler):
         None.
 
     Methods:
-        statistics_by_gender(self): Returns statistic data as generator via first week day with results which grouped
+        statistics_by_gender(self): Yields statistic data as generator via first week day with results which grouped
             by gender..
-        _get_statistics_by_columns_names(self, columns_names: Tuple): private method - Returns statistic data as
+        _get_statistics_by_columns_names(self, columns_names: Tuple): private method - Yields statistic data as
             generator via first week day with results which grouped by gender.
-        statistics_by_given_first_week_day(self, week_day: str): Returns statistic data as generator by given first
+        statistics_by_given_first_week_day(self, week_day: str): Yields statistic data as generator by given first
             week day grouped by gender
-        statistics_by_age_group(self): Returns a generator which includes statistic of calculated fields by ordered
+        statistics_by_age_group(self): Yields a generator which includes statistic of calculated fields by ordered
             by age group.
 
     """
@@ -34,14 +34,14 @@ class AgeGender(DataHandler):
     def statistics_by_gender(self) -> \
             Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or \
             Generator[str, None, None]:
-        """ Returns statistic data as generator via first week day with results which grouped by gender.
+        """ Yields statistic data as generator via first week day with results which grouped by gender.
 
         Args:
             None.
 
-        Returns:
-            _(Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or
-                Generator[str, None, None]): desired data inside data holder as generator or "No Data" as bad result.
+        Yields:
+            DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data inside data
+                holder as generator or "No Data" as bad result.
 
         """
 
@@ -50,7 +50,7 @@ class AgeGender(DataHandler):
     def _get_statistics_by_columns_names(self, columns_names: Tuple) ->\
             Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or \
             Generator[str, None, None]:
-        """ Returns statistic data as generator via first week day with results which grouped by gender.
+        """ Yields statistic data as generator via first week day with results which grouped by gender.
 
         Note:
             private method which get called by other method for data statistic calculation.
@@ -58,9 +58,9 @@ class AgeGender(DataHandler):
         Args:
             columns_names(Tuple): required columns name of data frames for data manipulations.
 
-        Returns:
-            data dict(Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or
-                Generator[str, None, None]): desired data inside data holder as generator or "No Data" as bad result.
+        Yields:
+            DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data inside data holder as
+                generator or "No Data" as bad result.
 
         """
 
@@ -86,14 +86,13 @@ class AgeGender(DataHandler):
     @lru_cache
     def statistics_by_given_first_week_day(self, week_day: str) ->\
             Generator[DefaultDict[str, Dict[str, Dict[str, str]]], None, None] or Generator[str, None, None]:
-        """ Returns statistic data as generator by given first week day grouped by gender.
+        """ Yields statistic data as generator by given first week day grouped by gender.
 
         Args:
             week_day(str): given week day for data manipulation.
 
-        Returns:
-            data dict(Generator[DefaultDict[str, Dict[str, Dict[str, str]]], None, None] or Generator[str, None, None]):
-                desired data as generator.
+        Yields:
+            Dict[str, Dict[str, str]] or str: desired data as generator or "No Data" for bad result.
 
         """
 
@@ -119,13 +118,13 @@ class AgeGender(DataHandler):
     @lru_cache
     def statistics_by_age_group(self) \
             -> Generator[DefaultDict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes statistic of calculated fields by ordered by age group.
+        """ Yields a generator which includes statistic of calculated fields by ordered by age group.
 
         Args:
             None.
 
-        Returns:
-            data dict(DefaultDict[str, Dict[str, int or float]]): desired data inside data holder.
+        Yields:
+            Dict[str, int or float] or str: desired data inside data holder as a generator or "No Data" for bad result.
 
         """
 
