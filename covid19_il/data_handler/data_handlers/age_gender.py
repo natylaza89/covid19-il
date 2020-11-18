@@ -13,14 +13,13 @@ class AgeGender(DataHandler):
         None.
 
     Methods:
-        statistics_by_gender(self): Yields statistic data as generator via first week day with results which grouped
+        statistics_by_gender(self): Yields statistic data via first week day with results which grouped
             by gender..
         _get_statistics_by_columns_names(self, columns_names: Tuple): private method - Yields statistic data as
             generator via first week day with results which grouped by gender.
-        statistics_by_given_first_week_day(self, week_day: str): Yields statistic data as generator by given first
-            week day grouped by gender
-        statistics_by_age_group(self): Yields a generator which includes statistic of calculated fields by ordered
-            by age group.
+        statistics_by_given_first_week_day(self, week_day: str): Yields statistic data by given first week day grouped
+            by gender.
+        statistics_by_age_group(self): Yields statistic of calculated fields by ordered by age group.
 
     """
 
@@ -34,7 +33,7 @@ class AgeGender(DataHandler):
     def statistics_by_gender(self) -> \
             Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or \
             Generator[str, None, None]:
-        """ Yields statistic data as generator via first week day with results which grouped by gender.
+        """ Yields statistic data via first week day with results which grouped by gender.
 
         Args:
             None.
@@ -50,7 +49,7 @@ class AgeGender(DataHandler):
     def _get_statistics_by_columns_names(self, columns_names: Tuple) ->\
             Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or \
             Generator[str, None, None]:
-        """ Yields statistic data as generator via first week day with results which grouped by gender.
+        """ Yields statistic data via first week day with results which grouped by gender.
 
         Note:
             private method which get called by other method for data statistic calculation.
@@ -86,7 +85,7 @@ class AgeGender(DataHandler):
     @lru_cache
     def statistics_by_given_first_week_day(self, week_day: str) ->\
             Generator[DefaultDict[str, Dict[str, Dict[str, str]]], None, None] or Generator[str, None, None]:
-        """ Yields statistic data as generator by given first week day grouped by gender.
+        """ Yields statistic data by given first week day grouped by gender.
 
         Args:
             week_day(str): given week day for data manipulation.
@@ -116,9 +115,10 @@ class AgeGender(DataHandler):
                 yield "No Data"
 
     @lru_cache
-    def statistics_by_age_group(self) \
-            -> Generator[DefaultDict[str, DefaultDict[str, Dict[str, int or float]]], None, None] or Generator[str, None, None]:
-        """ Yields a generator which includes statistic of calculated fields by ordered by age group.
+    def statistics_by_age_group(self) ->\
+            Generator[DefaultDict[str, DefaultDict[str, Dict[str, int or float]]], None, None] or\
+            Generator[str, None, None]:
+        """ Yields statistic of calculated fields by ordered by age group.
 
         Args:
             None.
