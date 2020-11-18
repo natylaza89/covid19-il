@@ -1,6 +1,6 @@
-from collections import defaultdict, namedtuple
+from collections import namedtuple
 from functools import lru_cache
-from typing import Dict, Generator, NamedTuple, AnyStr
+from typing import Dict, Generator, NamedTuple
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -13,12 +13,17 @@ class LabTests(DataHandler):
         None.
 
     Methods:
-        corona_results(self): Returns value counts of corona results.
-        lab_tests_statistics(self): Returns value counts of lab tests.
-        is_first_test_statistics(self): Returns value counts of if is it the first test for tested persons.
-        test_for_corona_statistics(self): Returns value counts of test_for_corona_statistics.
+        _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False): Returns a generator which includes
+            a dictionary of value counts of given column name.
+        corona_results(self): Returns a generator which includes a dictionary of value counts of corona results.
+        lab_tests_statistics(self): Returns a generator which includes a dictionary of value counts of lab tests.
+        is_first_test_statistics(self): Returns a generator which includes a dictionary of value counts of if is it the
+            first test for tested persons.
+        test_for_corona_statistics(self): Returns a generator which includes a dictionary of value counts of
+            test_for_corona_statistics.
             '1': tested didn't acknowledge as positive , '0': tested already acknowledged as positive.
-
+        tests_results_data_by_test_date(self, date: str): Returns test results data by given test date as a generator of
+            namedtuple.
 
     """
 
@@ -29,8 +34,9 @@ class LabTests(DataHandler):
         """ Initialize Base Class & Instance Attributes """
         super().__init__(logger, json_data)
 
-    def _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False) -> Dict[str, int]:
-        """ Returns value counts of given column name.
+    def _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False) \
+            -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
+        """ Returns a generator which includes a dictionary of value counts of given column name.
 
         Note:
             private method - gets called by the others class's methods.
@@ -40,7 +46,8 @@ class LabTests(DataHandler):
             is_sorted(bool): whether sort the results.
 
         Returns:
-            data dict(Dict[str, int]): desired data inside data holder.
+            data dict(Generator[Dict[str, int], None, None] or Generator[str, None, None]): desired data as a generator
+                or "No Data" for bad result.
 
         """
 
@@ -57,11 +64,15 @@ class LabTests(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                for _item in data_dict.items():
+                    yield _item
+            else:
+                yield "No Data"
 
     @lru_cache
     def corona_results(self) -> Dict[str, int]:
-        """ Returns value counts of corona results.
+        """ Returns a generator which includes a dictionary of value counts of corona results.
 
         Args:
             None.
@@ -74,8 +85,8 @@ class LabTests(DataHandler):
         return self._get_statistics_by_column('corona_result', True)
 
     @lru_cache
-    def lab_tests_statistics(self) -> Dict[str, int]:
-        """ Returns value counts of lab tests.
+    def lab_tests_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
+        """ Returns a generator which includes a dictionary of value counts of lab tests.
 
         Args:
             None.
@@ -88,8 +99,9 @@ class LabTests(DataHandler):
         return self._get_statistics_by_column('lab_id', True)
 
     @lru_cache
-    def is_first_test_statistics(self) -> Dict[str, int]:
-        """ Returns value counts of if is it the first test for tested persons.
+    def is_first_test_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
+        """ Returns a generator which includes a dictionary of value counts of if is it the first test
+            for tested persons.
 
         Args:
             None.
@@ -102,9 +114,9 @@ class LabTests(DataHandler):
         return self._get_statistics_by_column('is_first_Test')
 
     @lru_cache
-    def test_for_corona_statistics(self) -> Dict[str, int]:
-        """ Returns value counts of test_for_corona_statistics.
-            '1': tested didn't acknowledge as positive , '0': tested already acknowledged as positive
+    def test_for_corona_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
+        """ Returns a generator which includes a dictionary of value counts of test_for_corona_statistics.
+            '1': tested didn't acknowledge as positive , '0': tested already acknowledged as positive.
 
         Args:
             None.
@@ -118,7 +130,7 @@ class LabTests(DataHandler):
 
     @lru_cache
     def tests_results_data_by_test_date(self, date: str) -> Generator[NamedTuple, None, None]:
-        """ Returns test results data by given test date as generator of namedtuples.
+        """ Returns test results data by given test date as a generator of namedtuple.
 
         Args:
             date(str): given date for data manipulation.
