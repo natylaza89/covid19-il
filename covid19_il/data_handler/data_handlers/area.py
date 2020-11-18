@@ -14,18 +14,16 @@ class Area(DataHandler):
         None.
 
     Methods:
-        get_data_by_event_type(self, event_type: AreaEvent): Returns a generator which includes data of new events
-            organized by town agas code.
+        get_data_by_event_type(self, event_type: AreaEvent): Yields data of new events organized by town agas code.
         _string_parser(self, str_key: str) -> List[str]: Overridden Method - clean string from unnecessary chars
-         for better presentation.
-        _get_data_by_column(self, column_name: str, ascending_order: bool = True): Returns a generator which includes
-            a Dictionary of Top Total Amount of given column name via DataFrame Data.
-        get_accumulated_tested_by_town(self, ascending_order: bool = True): Returns a generator which includes a
-            dictionary with accumulated tested amount by town data.
-        get_hospitalized_amount(self, ascending_order: bool = True): Returns a generator which includes a dictionary
-            with hospitalized amount data.
-        get_accumulated_recoveries_amount(self, ascending_order: bool = True): Returns a generator which includes a
-            dictionary with accumulated recoveries amount data.
+            for better presentation.
+        _get_data_by_column(self, column_name: str, ascending_order: bool = True): Yields Top Total Amount of given
+            column name via DataFrame Data.
+        get_accumulated_tested_by_town(self, ascending_order: bool = True): Yields data of accumulated tested amount by
+            town.
+        get_hospitalized_amount(self, ascending_order: bool = True): Yields data of hospitalized amount.
+        get_accumulated_recoveries_amount(self, ascending_order: bool = True): Yields data of accumulated recoveries
+            amount.
 
     """
 
@@ -35,14 +33,13 @@ class Area(DataHandler):
 
     def get_data_by_event_type(self, event_type: AreaEvent) \
             -> Generator[Dict[Tuple[str, str], str], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes data of new events organized by town agas code.
+        """ Yields data of new events organized by town agas code.
 
         Args:
             event_type(AreaEvent): event type(enum) which determined which data to get returns.
 
-        Returns:
-            data_dict(Generator[Dict[Tuple[str, str], str], None, None] or Generator[str, None, None]):
-                data event as a generator.
+        Yields:
+            Tuple[Tuple[str, str], str]] or str: data event or "No Data" for bad result.
 
         """
 
@@ -76,6 +73,7 @@ class Area(DataHandler):
             _(int): 0 to flag it as unknown area.
 
         """
+
         return 0 if input_string is None else input_string
 
     def _string_parser(self, str_key: str) -> List[str]:
@@ -99,7 +97,7 @@ class Area(DataHandler):
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = True) \
             -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a Dictionary of Top Total Amount of given column name via DataFrame Data.
+        """ Yields Top Total Amount of given column name via DataFrame Data.
 
         Note:
             Overridden Method: private method which get called by the other methods by given event type.
@@ -108,8 +106,8 @@ class Area(DataHandler):
             group_by_column(str): column name of event type.
             ascending_order(bool): final result's ordering by de/ascending.
 
-        Returns:
-            data_dict(Dict): a generator which includes top total amount of given column(by event type) data.
+        Yields:
+            Tuple[str, int]: top total amount of given column(by event type) data or "No Data" for bad result.
 
         """
 
@@ -128,22 +126,21 @@ class Area(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for city in data_dict.items():
-                    yield city
+                for item in data_dict.items():
+                    yield item
             else:
                 yield "No Data"
 
     @lru_cache
     def get_accumulated_tested_by_town(self, ascending_order: bool = True) \
             -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary with accumulated tested amount by town data.
+        """ Yields data of accumulated tested amount by town.
 
         Args:
             ascending_order(bool): final result's ordering by de/ascending.
 
-        Returns:
-            data_dict(Generator[Dict[str, int], None, None] or Generator[str, None, None]):
-                a generator which includes accumulated tested amount by town data.
+        Yields:
+            Tuple[str, int], None, None] or str: accumulated tested amount by town data.
 
         """
 
@@ -152,14 +149,13 @@ class Area(DataHandler):
     @lru_cache
     def get_hospitalized_amount(self, ascending_order: bool = True) \
             -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary with hospitalized amount data.
+        """ Yields data of hospitalized amount.
 
         Args:
             ascending_order(bool): final result's ordering by de/ascending.
 
-        Returns:
-            data_dict(Generator[Dict[str, int], None, None] or Generator[str, None, None]):
-                a generator which includes accumulated tested amount by town data.
+        Yields:
+            Tuple[str, int], None, None] or str: accumulated tested amount by town data.
 
         """
 
@@ -168,14 +164,13 @@ class Area(DataHandler):
     @lru_cache
     def get_accumulated_recoveries_amount(self, ascending_order: bool = True) \
             -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary with accumulated recoveries amount data.
+        """ Yields accumulated recoveries amount data.
 
         Args:
             ascending_order(bool): final result's ordering by de/ascending.
 
-        Returns:
-            data_dict(Generator[Dict[str, int], None, None] or Generator[str, None, None]):
-                a generator which includes accumulated tested amount by town data.
+        Yields:
+            Tuple[str, int], None, None] or str: accumulated tested amount by town data.
 
         """
 
