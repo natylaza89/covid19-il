@@ -1,6 +1,6 @@
 from collections import namedtuple
 from functools import lru_cache
-from typing import Dict, Generator, NamedTuple
+from typing import Dict, Generator, NamedTuple, Tuple
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -13,17 +13,14 @@ class LabTests(DataHandler):
         None.
 
     Methods:
-        _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False): Returns a generator which includes
-            a dictionary of value counts of given column name.
-        corona_results(self): Returns a generator which includes a dictionary of value counts of corona results.
-        lab_tests_statistics(self): Returns a generator which includes a dictionary of value counts of lab tests.
-        is_first_test_statistics(self): Returns a generator which includes a dictionary of value counts of if is it the
-            first test for tested persons.
-        test_for_corona_statistics(self): Returns a generator which includes a dictionary of value counts of
-            test_for_corona_statistics.
+        _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False): Yields value counts of given
+            column name.
+        corona_results(self): Yields value counts of corona results.
+        lab_tests_statistics(self): Yields value counts of lab tests.
+        is_first_test_statistics(self): Yields value counts of if is it the first test for tested persons.
+        test_for_corona_statistics(self): Yields value counts of test_for_corona_statistics.
             '1': tested didn't acknowledge as positive , '0': tested already acknowledged as positive.
-        tests_results_data_by_test_date(self, date: str): Returns test results data by given test date as a generator of
-            namedtuple.
+        tests_results_data_by_test_date(self, date: str): Yields test results data by given test date as namedtuple.
 
     """
 
@@ -35,7 +32,7 @@ class LabTests(DataHandler):
         super().__init__(logger, json_data)
 
     def _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False) \
-            -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
+            -> Generator[Dict[str, int], None, None] or Generator[Tuple[str, str], None, None]:
         """ Yields value counts of given column name.
 
         Note:
@@ -46,7 +43,8 @@ class LabTests(DataHandler):
             is_sorted(bool): whether sort the results.
 
         Yields:
-            data dict(Generator[Dict[str, int], None, None] or Tuple[str, str]): desired data  or "No Data" for bad result.
+            data dict(Generator[Dict[str, int], None, None] or Tuple[str, str]): desired data  or "No Data" for
+                bad result.
 
         """
 
@@ -67,86 +65,91 @@ class LabTests(DataHandler):
                 for _item in data_dict.items():
                     yield _item
             else:
-                yield "No Data"
+                yield "No Data", ""
 
     @lru_cache
-    def corona_results(self) -> Dict[str, int]:
-        """ Returns a generator which includes a dictionary of value counts of corona results.
+    def corona_results(self) -> Generator[Dict[str, int], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields value counts of corona results.
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, int]): desired data inside data holder.
+        Yields:
+            Tuple[str, int] or Tuple[str, str]: desired data or "No Data" for bad result.
 
         """
 
         return self._get_statistics_by_column('corona_result', True)
 
     @lru_cache
-    def lab_tests_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary of value counts of lab tests.
+    def lab_tests_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields value counts of lab tests.
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, int]): desired data inside data holder.
+        Yields:
+            Tuple[str, int] or Tuple[str, str]: desired data or "No Data" for bad result.
 
         """
 
         return self._get_statistics_by_column('lab_id', True)
 
     @lru_cache
-    def is_first_test_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary of value counts of if is it the first test
-            for tested persons.
+    def is_first_test_statistics(self) \
+            -> Generator[Dict[str, int], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields value counts of if is it the first test for tested persons.
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, int]): desired data inside data holder.
+        Yields:
+            Tuple[str, int] or Tuple[str, str]: desired data or "No Data" for bad result.
 
         """
 
         return self._get_statistics_by_column('is_first_Test')
 
     @lru_cache
-    def test_for_corona_statistics(self) -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary of value counts of test_for_corona_statistics.
+    def test_for_corona_statistics(self) \
+            -> Generator[Dict[str, int], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields value counts of test_for_corona_statistics.
             '1': tested didn't acknowledge as positive , '0': tested already acknowledged as positive.
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, int]): desired data inside data holder.
+        Yields:
+            Tuple[str, int] or Tuple[str, str]: desired data or "No Data" for bad result.
 
         """
 
         return self._get_statistics_by_column('test_for_corona_diagnosis')
 
     @lru_cache
-    def tests_results_data_by_test_date(self, date: str) -> Generator[NamedTuple, None, None]:
-        """ Returns test results data by given test date as a generator of namedtuple.
+    def tests_results_data_by_test_date(self, date: str) \
+            -> Generator[NamedTuple, None, None] or Generator[str, None, None]:
+        """ Yields test results data by given test date as a namedtuple.
 
         Args:
             date(str): given date for data manipulation.
 
         Yields:
-            _Generator[NamedTuple, None, None]: yield CoronaResult namedtuple each time.
+            NamedTuple or str: Yields CoronaResult as namedtuple or "No Data" for bad results.
 
         """
 
+        data = None
         try:
             df = self._get_clean_copy_df_data()
             df = df[df['test_date'] == date]
             ser_group_by = df.groupby([*df.columns])['test_date'].unique()
-
-            for key in ser_group_by.keys():
-                yield LabTests.test(*key[2:])
-
+            data = ser_group_by.keys()
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
-
+        finally:
+            if not data.empty:
+                for key in data:
+                    yield LabTests.test(*key[2:])
+            else:
+                yield "No Data"
