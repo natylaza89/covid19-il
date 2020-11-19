@@ -51,9 +51,8 @@ class Hospitalized(DataHandler):
 
         return ser.unique(), df_columns
 
-    def hospitalized_total_stats(self) \
-            -> Generator[DefaultDict[str, Dict[str, float or int]], None, None] or \
-               Generator[Tuple[str, str], None, None]:
+    def hospitalized_total_stats(self) -> Generator[DefaultDict[str, Dict[str, float or int]], None, None] or \
+                                          Generator[Tuple[str, str], None, None]:
         """ Yields Hospitalized Total Stats data.
 
         Args:
