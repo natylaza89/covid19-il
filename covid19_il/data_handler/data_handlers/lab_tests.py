@@ -46,7 +46,7 @@ class LabTests(DataHandler):
             is_sorted(bool): whether sort the results.
 
         Yields:
-            data dict(Generator[Dict[str, int], None, None] or tuplnerator[str, None, None]): desired data  or "No Data" for bad result.
+            data dict(Generator[Dict[str, int], None, None] or Tuple[str, str]): desired data  or "No Data" for bad result.
 
         """
 
