@@ -51,8 +51,8 @@ class Hospitalized(DataHandler):
 
         return ser.unique(), df_columns
 
-    def hospitalized_total_stats(self) \
-            -> Generator[DefaultDict[str, Dict[str, float or int]], None, None] or Generator[str, None, None]:
+    def hospitalized_total_stats(self) -> Generator[DefaultDict[str, Dict[str, float or int]], None, None] or \
+                                          Generator[Tuple[str, str], None, None]:
         """ Yields Hospitalized Total Stats data.
 
         Args:
@@ -87,7 +87,7 @@ class Hospitalized(DataHandler):
 
     @lru_cache
     def hospitalized_stats_by_date(self, date: str) \
-            -> Generator[Dict[str, float or int or str], None, None] or Generator[str, None, None]:
+            -> Generator[Dict[str, float or int or str], None, None] or Generator[Tuple[str, str], None, None]:
         """ Yields Hospitalized statistics by given date.
 
         Args:

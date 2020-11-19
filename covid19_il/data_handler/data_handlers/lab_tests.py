@@ -36,7 +36,7 @@ class LabTests(DataHandler):
 
     def _get_statistics_by_column(self, column_name: str,  is_sorted: bool = False) \
             -> Generator[Dict[str, int], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes a dictionary of value counts of given column name.
+        """ Yields value counts of given column name.
 
         Note:
             private method - gets called by the others class's methods.
@@ -45,9 +45,8 @@ class LabTests(DataHandler):
             column_name(str): given column name for data manipulation.
             is_sorted(bool): whether sort the results.
 
-        Returns:
-            data dict(Generator[Dict[str, int], None, None] or Generator[str, None, None]): desired data as a generator
-                or "No Data" for bad result.
+        Yields:
+            data dict(Generator[Dict[str, int], None, None] or tuplnerator[str, None, None]): desired data  or "No Data" for bad result.
 
         """
 
