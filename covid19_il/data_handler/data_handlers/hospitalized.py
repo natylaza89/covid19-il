@@ -95,7 +95,8 @@ class Hospitalized(DataHandler):
             date(str): required date for data processing.
 
         Yields:
-            Tuple[str, float or int or str] or Tuple[str, str]: hospitalized_stats_by_date's data or "No Data" as bad result.
+            Tuple[str, float or int or str] or Tuple[str, str]: hospitalized_stats_by_date's data or "No Data" as bad
+                result.
 
         Raises:
             ValueError: exception raises when date string isn't in a valid pattern like: "2020-10-03".
