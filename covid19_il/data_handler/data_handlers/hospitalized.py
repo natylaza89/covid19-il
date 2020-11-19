@@ -53,14 +53,13 @@ class Hospitalized(DataHandler):
 
     def hospitalized_total_stats(self) \
             -> Generator[DefaultDict[str, Dict[str, float or int]], None, None] or Generator[str, None, None]:
-        """ Returns Hospitalized Total Stats data as a generator.
+        """ Yields Hospitalized Total Stats data.
 
         Args:
             None.
 
-        Returns:
-            data_dict(Generator[DefaultDict[str, Dict[str, float or int]], None, None] or Generator[str, None, None]):
-                hospitalized_total_stats's data inside a data holder as a generator or "No Data" as bad result.
+        Yields:
+            Tuple[str, Dict[str, float or int]] or str: hospitalized_total_stats's data or "No Data" as bad result.
 
         """
 
@@ -84,19 +83,18 @@ class Hospitalized(DataHandler):
                 for item in data_dict.items():
                     yield item
             else:
-                yield "No Data"
+                yield "No Data", ""
 
     @lru_cache
     def hospitalized_stats_by_date(self, date: str) \
-            -> Generator[Dict[str, float or int], None, None] or Generator[str, None, None]:
-        """ Return a generator which includes a dictionary of Hospitalized statistics by given date.
+            -> Generator[Dict[str, float or int or str], None, None] or Generator[str, None, None]:
+        """ Yields Hospitalized statistics by given date.
 
         Args:
             date(str): required date for data processing.
 
-        Returns:
-            data_dict(Generator[Dict[str, float or int], None, None] or Generator[str, None, None]):
-                generator which includes a dictionary of hospitalized_stats_by_date's data.
+        Yields:
+            Tuple[str, float or int or str] or str: hospitalized_stats_by_date's data or "No Data" as bad result.
 
         Raises:
             ValueError: exception raises when date string isn't in a valid pattern like: "2020-10-03".
@@ -122,4 +120,4 @@ class Hospitalized(DataHandler):
                 for item in data_dict.items():
                     yield item
             else:
-                yield "No Data"
+                yield "No Data", ""
