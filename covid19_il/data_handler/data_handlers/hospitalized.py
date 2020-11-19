@@ -19,9 +19,8 @@ class Hospitalized(DataHandler):
     Methods:
         _arrange_data_before_processing(self, df, method_name: str): Get df columns name list for group by then return
             a series with unique items
-        hospitalized_total_stats(self): Returns Hospitalized Total Stats data as a generator.
-        hospitalized_stats_by_date(self, date: str): Return a generator which includes a dictionary of Hospitalized
-            statistics by given date.
+        hospitalized_total_stats(self): Yields Hospitalized Total Stats data.
+        hospitalized_stats_by_date(self, date: str): Yields Hospitalized statistics by given date.
 
     """
 
