@@ -15,17 +15,15 @@ class MedicalStaffMorbidity(DataHandler):
 
     Methods:
         _get_data_by_columns(self, required_columns_names: Tuple[str, str, str], ascending_order: bool = False):
-            Returns dictionary of dictionary with data for data of isolated/confirmed cases.
-        confirmed_cases(self): Returns dictionary of dictionary with total confirmed cases data.
-        isolated_cases(self): Returns dictionary of dictionary with total isolated cases.
+            Yields data for data of isolated/confirmed cases.
+        confirmed_cases(self): Yields total confirmed cases data.
+        isolated_cases(self): Yields total isolated cases.
         _get_data_by_date(self, date: str, required_columns_names: Tuple[str, str, str]): Get data by exactly date's
-            pattern & returns a dictionary with data statistics.
-        confirmed_cases_by_date(self, date: str): Returns confirmed cases statistics by given date as dictionary.
-        isolated_cases_by_date(self, date: str): Returns isolated cases statistics by given date as dictionary.
-        confirmed_cases_statistics(self): Returns dictionary of dictionary of Confirmed cases statistics: min, max,
-            mean, total(sum).
-        isolated_cases_statistics(self): Returns dictionary of dictionary of Isolated cases statistics: min, max, mean,
-            total(sum).
+            pattern & Yields data statistics.
+        confirmed_cases_by_date(self, date: str): Yields confirmed cases statistics by given date.
+        isolated_cases_by_date(self, date: str): Yields isolated cases statistics by given date.
+        confirmed_cases_statistics(self): Yields Confirmed cases statistics: min, max, mean, total(sum).
+        isolated_cases_statistics(self): Yields Isolated cases statistics: min, max, mean, total(sum).
 
     """
 
@@ -38,18 +36,18 @@ class MedicalStaffMorbidity(DataHandler):
         super().__init__(logger, json_data)
 
     def _get_data_by_columns(self, required_columns_names: Tuple[str, str, str], ascending_order: bool = False)\
-            -> Generator[Dict[str, Dict[str, Any]], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes dictionary of dictionary with data for data of isolated/confirmed cases.
+            -> Generator[Dict[str, Dict[str, Any]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields data of isolated/confirmed cases.
 
         Note:
             private method which get called other methods for data manipulation by columns.
 
         Args:
-            required_columns_names(Tuple[str, str, str]): df's columns names for data processing.
+            required_columns_names(Tuple[str, str, str]): df columns names for data processing.
             ascending_order(bool): final results order in de/ascending.
 
-        Returns:
-            data_dict(Generator[Dict[str, Dict[str, Any]], None, None] or Generator[str, None, None]): desired data by date as a generator.
+        Yields:
+            Tuple[str, Dict[str, int or str]] or Tuple[str, str]: desired data or "No Data" as bad result.
 
         """
 
@@ -71,48 +69,51 @@ class MedicalStaffMorbidity(DataHandler):
                 for item in data_dict.items():
                     yield item
             else:
-                yield "No Data"
+                yield "No Data", ""
 
     @lru_cache
-    def confirmed_cases(self) -> Dict[str, Dict[str, int or str]]:
-        """ Returns dictionary of dictionary with total confirmed cases data.
+    def confirmed_cases(self) \
+            -> Generator[Dict[str, Dict[str, int or str]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields total confirmed cases data.
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, Dict[str, int or str]]): desired data in data holder.
+        Yields:
+            Tuple[str, Dict[str, int or str]] or Tuple[str, str]: desired data or "No Data" as bad result.
 
         """
 
         return self._get_data_by_columns(MedicalStaffMorbidity.confirmed_columns_names)
 
     @lru_cache
-    def isolated_cases(self) -> Dict[str, Dict[str, float or int]]:
-        """ Returns dictionary of dictionary with total isolated cases.
+    def isolated_cases(self) \
+            -> Generator[Dict[str, Dict[str, int or str]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields total isolated cases.
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, Dict[str, float or int]]): desired data in data holder.
+        Yields:
+            Tuple[str, Dict[str, int or str]]: desired data or "No Data" as bad result.
 
         """
 
         return self._get_data_by_columns(MedicalStaffMorbidity.isolated_columns_names)
 
-    def _get_data_by_date(self, date: str, required_columns_names: Tuple[str, str, str]) -> Dict[str, Any]:
-        """ Get data by exactly date's pattern & returns a dictionary with data statistics.
+    def _get_data_by_date(self, date: str, required_columns_names: Tuple[str, str, str]) \
+            -> Generator[Dict[str, Any], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Get data by exactly date's pattern & Yields data statistics.
 
         Note:
             private method which get called other methods for data manipulation by date.
 
         Args:
             date(str): required date for data processing.
-            required_columns_names(Tuple[str, str, str]): df's columns names for data processing.
+            required_columns_names(Tuple[str, str, str]): df columns names for data processing.
 
-        Returns:
-            data_dict(Dict[str, Any]): desired data by date inside a dictionary.
+        Yields:
+            Tuple[str, Any] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         Raises:
             ValueError: exception raises when date string isn't in a valid pattern like: "2020-10-03".
@@ -134,59 +135,67 @@ class MedicalStaffMorbidity(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                for _item in data_dict.items():
+                    yield _item
+            else:
+                yield "No Data", ""
 
     @lru_cache
-    def confirmed_cases_by_date(self, date: str) -> Dict[str, float or int]:
-        """ Return confirmed cases statistics by given date as dictionary.
+    def confirmed_cases_by_date(self, date: str) \
+            -> Generator[Dict[str, Any], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields confirmed cases statistics by given date.
 
         Args:
             date(str): desired date for data processing.
 
-        Returns:
-            _(Dict[str, float or int]): desired data in data holder.
+        Yields:
+            Tuple[str, Any] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         """
 
         return self._get_data_by_date(date, MedicalStaffMorbidity.confirmed_columns_names)
 
     @lru_cache
-    def isolated_cases_by_date(self, date: str) -> Dict[str, str]:
-        """ Return isolated cases statistics by given date as dictionary.
+    def isolated_cases_by_date(self, date: str) \
+            -> Generator[Dict[str, str], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields isolated cases statistics by given date.
 
         Args:
             date(str): desired date for data processing.
 
-        Returns:
-            _(Dict[str, str]): desired data in data holder.
+        Yields:
+            Tuple[str, Any] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         """
 
         return self._get_data_by_date(date, MedicalStaffMorbidity.isolated_columns_names)
 
     @lru_cache
-    def confirmed_cases_statistics(self) -> Dict[str, Dict[str, int or float]]:
-        """ Return dictionary of dictionary of Confirmed cases statistics: min, max, mean, total(sum).
+    def confirmed_cases_statistics(self) \
+            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields Confirmed cases statistics: min, max, mean, total(sum).
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, Dict[str, int or float]]): desired data in data holder.
+        Yields:
+            Tuple[str, Dict[str, int or float]] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         """
 
         return self._get_statistics_by_columns_names(MedicalStaffMorbidity.confirmed_columns_names)
 
     @lru_cache
-    def isolated_cases_statistics(self) -> Dict[str, Dict[str, int or float]]:
-        """ Return dictionary of dictionary of Isolated cases statistics: min, max, mean, total(sum).
+    def isolated_cases_statistics(self) \
+            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields Isolated cases statistics: min, max, mean, total(sum).
 
         Args:
             None.
 
-        Returns:
-            _(Dict[str, Dict[str, int or float]]): desired data in data holder.
+        Yields:
+            Tuple[str, Dict[str, int or float]] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         """
 
