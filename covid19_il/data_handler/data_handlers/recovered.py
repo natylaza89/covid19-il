@@ -1,7 +1,7 @@
 from collections import defaultdict
 from functools import lru_cache
 from numpy import int64 as numpy_int64, float64 as numpy_float64
-from typing import Dict, DefaultDict
+from typing import Dict, DefaultDict, Generator, Tuple
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -14,7 +14,7 @@ class Recovered(DataHandler):
         None.
 
     Methods:
-        test_indication(self): returns data holder of test indication's amount by gender & age group.
+        test_indication(self): Yields test indication's amount by gender & age group.
         days_from_pos_to_recovery_stats(self): Min, Max, Mean of Days from positive to recovery.
         total_tests_count(self): Returns total tests count by gender & age groups.
 
@@ -25,31 +25,34 @@ class Recovered(DataHandler):
         super().__init__(logger, json_data)
 
     @lru_cache
-    def test_indication(self) -> DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]]:
-        """ Returns data holder of test indication's amount by gender & age group.
+    def test_indication(self) -> Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or \
+                                 Generator[Tuple[str, str], None, None]:
+
+        """ Yields test indication's amount by gender & age group.
 
         Args:
             None.
 
-        Returns:
-            _(DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]]): desired data in data holder.
+        Yields:
+            Tuple[str, DefaultDict[str, DefaultDict[str, int]]] or Tuple[str, str]): desired data or "No Data" as
+                bad result.
 
         """
 
         return self._get_data_by_columns(('test_indication', 'gender', 'age_group'), 'age_group')
 
     @lru_cache
-    def days_from_pos_to_recovery_stats(self) -> Dict[str, numpy_int64 or numpy_float64]:
+    def days_from_pos_to_recovery_stats(self) \
+            -> Generator[Dict[str, numpy_int64 or numpy_float64], None, None] or \
+               Generator[Tuple[str, str], None, None]:
         """ Min, Max, Mean of Days from positive to recovery.
 
         Args:
             None.
 
-        Returns:
-            _(Dict): desired data in data holder.
+       Yields:
+            Tuple[str, numpy_int64 or numpy_float64] or Tuple[str, str]: desired data or "No Data" as bad result.
 
-        Raises:
-            KeyError: concrete error which can occurred if data frame can't be access by given key.
         """
 
         data_dict = None
@@ -65,17 +68,23 @@ class Recovered(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                for item in data_dict.items():
+                    yield item
+            else:
+                yield "No Data", ""
 
     @lru_cache
-    def total_tests_count(self) -> DefaultDict[str, DefaultDict[str, int]]:
+    def total_tests_count(self) -> Generator[DefaultDict[str, DefaultDict[str, Dict[str, int]]], None, None] or \
+                                   Generator[Tuple[str, str], None, None]:
         """ Returns total tests count by gender & age groups.
 
         Args:
             None.
 
-        Returns:
-            _(DefaultDict[str, DefaultDict[str, int]]): desired data in data holder.
+        Yields:
+            Tuple[str, DefaultDict[str, Dict[str, int]] or Tuple[str, str]: hospitalized_total_stats's data or
+             "No Data" as  bad result.
 
         """
 
@@ -88,10 +97,15 @@ class Recovered(DataHandler):
 
             for key, value in ser_group_by.items():
                 # key[0]: test_amount, key[1] - gender, key[2]: age_group
-                data_dict[key[2]][key[1]] += (value * int(key[0]))
+                test_amount = 0 if key[0] == 'NULL' else int(key[0].strip('+'))
+                data_dict[key[2]][key[1]] += (value * test_amount)
 
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                for item in data_dict.items():
+                    yield item
+            else:
+                yield "No Data", ""
 
