@@ -172,6 +172,7 @@ class DataHandler(ABC):
         seed(0)
         return randint(1, 15) if (input_string == "<15" or
                                   input_string == "NULL" or
+                                  input_string == "N" or
                                   input_string == math.isnan(float(input_string))) \
             else int(input_string.split('.')[0])
 
@@ -206,22 +207,23 @@ class DataHandler(ABC):
                 for item in data_dict.items():
                     yield item
             else:
-                yield "No Data"
+                yield "No Data", ""
 
     def _get_data_by_columns(self, columns_names: Tuple, grouped_by_column: str) -> \
             Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or \
-            Generator[str, None, None]:
-        """ Returns data as a generator by given amount of columns from a data frame.
+            Generator[Tuple[str, str], None, None]:
+        """ Yields data by given amount of columns from a data frame.
 
         Note:
             private method which get called other methods for data manipulation by columns.
+
         Args:
             columns_names(Tuple): given required df's columns names as a tuple.
             grouped_by_column(str): specific column for pandas series group by operation.
 
-        Returns:
-            data_dict(Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or
-                Generator[str, None, None]): desired data as generator or "No Data" as bad result.
+        Yields:
+            Tuple[str, DefaultDict[str, DefaultDict[str, int]]] or Tuple[str, str]): desired data or "No Data" as
+                bad result.
 
         """
 
@@ -242,20 +244,20 @@ class DataHandler(ABC):
                 for item in data_dict.items():
                     yield item
             else:
-                yield "No Data"
+                yield "No Data", ""
 
     def _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr, AnyStr, AnyStr]) \
-            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]:
-        """ Returns a generator which includes statistics from data manipulation of given columns via data frame columns.
+            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields statistics from data manipulation of given columns via data frame columns.
 
         Note:
             private method which get called other methods for data manipulation by columns.
+
         Args:
             columns_names(Tuple): given required df's columns names as a tuple.
 
-        Returns:
-            data_dict(Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]):
-                desired data as generator or "No Data" as bad result.
+        Yields:
+            Tuple[str, Dict[str, int or float]] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         """
 
@@ -280,6 +282,6 @@ class DataHandler(ABC):
                 for item in data_dict.items():
                     yield item
             else:
-                yield "No Data"
+                yield "No Data", ""
 
 
