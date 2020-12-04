@@ -56,8 +56,7 @@ class TestedIndividuals(DataHandler):
             self._logger.exception(ie, "Boolean index did not match indexed array along dimension 0")
         finally:
             if bool(data_dict):
-                for item in data_dict.items():
-                    yield item
+                yield from data_dict.items()
             else:
                 yield "No Data", ""
 
@@ -81,8 +80,7 @@ class TestedIndividuals(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for item in data_dict.items():
-                    yield item
+                yield from data_dict.items()
             else:
                 yield "No Data", ""
 
@@ -141,10 +139,7 @@ class TestedIndividuals(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for item in data_dict.items():
-                    yield item
-            else:
-                yield "No Data", ""
+                yield from data_dict.items()
 
     def _string_parser(self, string: str) -> str:
         """ Returns True/False whether the int value of the string is truthy/falsy.

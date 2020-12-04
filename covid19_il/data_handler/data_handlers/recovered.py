@@ -69,8 +69,7 @@ class Recovered(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for item in data_dict.items():
-                    yield item
+                yield from data_dict.items()
             else:
                 yield "No Data", ""
 
@@ -104,8 +103,7 @@ class Recovered(DataHandler):
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
             if bool(data_dict):
-                for item in data_dict.items():
-                    yield item
+                yield from data_dict.items()
             else:
                 yield "No Data", ""
 
