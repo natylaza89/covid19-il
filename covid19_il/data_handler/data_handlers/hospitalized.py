@@ -1,4 +1,3 @@
-import re
 import inspect
 from collections import defaultdict
 from functools import lru_cache
@@ -101,10 +100,9 @@ class Hospitalized(DataHandler):
 
         """
 
-        re_result = re.search('(202[0-9])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$', date)
-        if re_result is None:
-            self._logger.exception(f"Wrong Date Format, the format should be like: '2020-10-03'. input was: {date}")
-            raise ValueError("Wrong Date Format, the format should be like: '2020-10-03'.")
+        self._date_validation(pattern='(202[0-9])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$',
+                              date=date)
+
         data_dict = None
         try:
             date += "T00:00:00"
