@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from covid19_il.tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
+from tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
 from covid19_il.data_handler.data_handlers.hospitalized import Hospitalized
 from covid19_il.data_handler.enums.resource_id import ResourceId
 
@@ -17,7 +17,7 @@ class TestHospitalized(DataHandlerTestsUtils):
 
     def setUp(self) -> None:
         """ Announce of starting the class's tests, initialize & verify deaths data handler's instance """
-        print("testing Deaths Class...")
+        print("testing Hospitalized Class...")
         self.data_handler_1 = self._init_mocked_data_handler(json_file_path="json_files/hospitalized_mocked_data.json",
                                                              resource_id_enum=ResourceId.HOSPITALIZED_DATA_RESOURCE_ID)
         self._check_base_step_of_all_methods(data_handler=self.data_handler_1, class_type=Hospitalized)
@@ -44,9 +44,11 @@ class TestHospitalized(DataHandlerTestsUtils):
         """ Tests results data & type of hospitalized stats by date """
         # Check if raise exception occurs
         with self.assertRaises(ValueError):
-            _ = self.data_handler_1.hospitalized_stats_by_date("2020-13-20")
+            a = self.data_handler_1.hospitalized_stats_by_date("2020-13-20")
+            print(*a)
         with self.assertRaises(ValueError):
-            _ = self.data_handler_1.hospitalized_stats_by_date("2020-11-201")
+            b = self.data_handler_1.hospitalized_stats_by_date("2020-11-201")
+            print(*b)
         # Get Data
         data = self.data_handler_1.hospitalized_stats_by_date("2020-03-20")
         results = {'מאושפזים': 277, 'אחוז נשים מאושפזות': 42.2, 'גיל ממוצע מאושפזים': 50, 'סטיית תקן גיל מאושפזים': 19.3, 'מונשמים': '<15', 'אחוז נשים מונשמות': 36.4, 'גיל ממוצע מונשמים': 70, 'סטיית תקן גיל מונשמים': 12.8, 'חולים קל': 242, 'אחוז נשים חולות קל': 43.4, 'גיל ממוצע חולים קל': 48, 'סטיית תקן גיל חולים קל': 19.0, 'חולים בינוני': '15.0', 'אחוז נשים חולות בינוני': '26.7', 'גיל ממוצע חולים בינוני': '59.0', 'סטיית תקן גיל חולים בינוני': '12.5', 'חולים קשה': '20.0', 'אחוז נשים חולות קשה': 40.0, 'גיל ממוצע חולים קשה': 71, 'סטיית תקן גיל חולים קשה': 11.9, 'חולים קשה מצטבר': '23.0'}

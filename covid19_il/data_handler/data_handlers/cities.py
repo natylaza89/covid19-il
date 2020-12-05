@@ -1,7 +1,7 @@
 from collections import namedtuple, defaultdict
 from datetime import datetime as dt
 from functools import lru_cache
-from typing import Dict, NamedTuple, Tuple, DefaultDict, AnyStr
+from typing import Dict, NamedTuple, Tuple, DefaultDict, AnyStr, Generator
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -14,12 +14,13 @@ class Cities(DataHandler):
         None.
 
     Methods:
-        cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): return calculated dictionary of
-            city_name: namedtuple with city's data props via given date
+        cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): Yields calculated cities of
+            namedtuple with city's data props via given date in format like: '2020-10-03'.
+            if it has no data, it yields "No Data" string as bad result.
         _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]): Helper Method of other class's method for
             calculation.
-        top_10_cases_in_cities(self): returns top 10 cities with 5 calculated properties.
-        cases_statistics(self): returns cases statistics.
+        top_cases_in_cities(self): Yields top cities with 5 calculated properties or "No Data" as bad result.
+        cases_statistics(self): Yields cases statistics.
 
     """
 
@@ -32,18 +33,17 @@ class Cities(DataHandler):
         super().__init__(logger, json_data)
 
     @lru_cache(maxsize=None)
-    def cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")) -> DefaultDict[str, NamedTuple]:
-        """ Return calculated dictionary of city_name: namedtuple with city's data props via given date in format
-            like: '2020-10-03'.
+    def cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")) \
+            -> Generator[NamedTuple, None, None] or Generator[str, None, None]:
+        """ Yields calculated cities of namedtuple with city's data props via given date in format
+            like: '2020-10-03'. if it has no data, it yields "No Data" string as bad result.
 
         Args:
             date(str): today's date as a string.
 
-        Returns:
-            data_dict(dict or none): cities by date data stored in a dictionary.
+        Yields:
+            NamedTuple[str, str]: city's data as namedtuple.
 
-        Raises:
-            KeyError: concrete error which can occurred if data frame can't be access by given key.
         """
 
         data_dict = None
@@ -55,25 +55,26 @@ class Cities(DataHandler):
 
             for key in data.keys():
                 data_dict[key[0]] = Cities.city(*key)
-
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data"
 
-    def _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]) -> DefaultDict[str, DefaultDict[str, int]]:
-        """ Helper Method of other class's method for calculation.
+    def _get_top_cases_statistics(self, cities_fields: Tuple[AnyStr]) \
+            -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
+        """ Helper Method of top_cases_in_cities method for calculation & data manipulation.
 
         Note:
-            private method which get called by get_data_by_event_type's method.
+            private method which get called by top_cases_in_cities's method.
         Args:
-            cities_fields(str): today's date as a string.
+            None.
 
-        Returns:
-            data_dict(DefaultDict[str, DefaultDict[str, int]]): top cities statistics data holder.
+        Yields:
+             Tuple[str, DefaultDict[str, int]] or str: top cities statistics data holder or "No Data" as bad result.
 
-        Raises:
-            KeyError: concrete error which can occurred if data frame can't be access by given key.
         """
 
         data_dict = None
@@ -94,25 +95,30 @@ class Cities(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data"
 
     @lru_cache
-    def top_cases_in_cities(self) -> DefaultDict[str, DefaultDict[str, int]]:
-        """ Returns top 10 cities with 5 calculated properties.
+    def top_cases_in_cities(self)\
+            -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or Generator[str, None, None]:
+        """ Yields top cities with 5 calculated properties or "No Data" as bad result.
 
         Args:
             None.
 
-        Returns:
-            _(DefaultDict[str, DefaultDict[str, int]]): top cities statistics data holder.
+        Yields:
+           Tuple[str, DefaultDict[str, int]] or str: top cities statistics data or "No Data" as bad result.
 
         """
 
         return self._get_top_cases_statistics(Cities.fields[3:])
 
     @lru_cache
-    def cases_statistics(self) -> Dict[str, Dict[str, int or float]]:
-        """ Returns cases statistics.
+    def cases_statistics(self) \
+            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[str, None, None]:
+        """ Yields cases statistics.
 
         Note:
             use inherited methods from base class.
@@ -120,7 +126,7 @@ class Cities(DataHandler):
             None.
 
         Returns:
-            _(DefaultDict[str, DefaultDict[str, int]]): top cities statistics data holder.
+            Tuple[str, Dict[str, int or float]] or str): top cities statistics data holder or "No Data" for bad result.
 
         """
 

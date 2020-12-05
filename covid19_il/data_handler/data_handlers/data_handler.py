@@ -3,7 +3,9 @@ from random import randint, seed
 import math
 from collections import defaultdict
 import pandas as pd
-from typing import Dict, DefaultDict, Tuple, AnyStr
+import re
+
+from typing import Dict, DefaultDict, Tuple, AnyStr, Generator
 
 from covid19_il.logger.logger import Logger
 
@@ -22,12 +24,12 @@ class DataHandler(ABC):
         _get_clean_copy_df_data(self): return a clean copy of class's data frame attribute.
         _string_parser(self, string: str): returns clean & non null string.
         _convert_string_to_int(self, input_string: str): parsing string to int.
-        _get_data_by_column(self, column_name: str): returns a dictionary of top total amount of given column name
-            via data frame.
-        _get_data_by_columns(self, columns_names: Tuple[AnyStr], grouped_by_column: str): returns data by given some
-            amount of columns of data frame.
-        _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr]): returns statistics from data manipulation
-            of given columns via data frame's columns.
+        _get_data_by_column(self, column_name: str): Returns a generator of dictionary which include top total amount
+            of given column name via data frame.
+        _get_data_by_columns(self, columns_names: Tuple[AnyStr], grouped_by_column: str): Returns data as a generator
+            by given amount of columns from a data frame.
+        _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr]): Returns a generator which includes
+            statistics from data manipulation of given columns via data frame columns.
 
     """
 
@@ -36,7 +38,7 @@ class DataHandler(ABC):
         self._logger = logger
         self._main_data = json_data
         self._df = self._convert_json_to_data_frame()
-        self._total_number = json_data['result']['total'] if not None else None
+        self._total_number = None
 
     def __repr__(self) -> str:
         """ Class Representation """
@@ -171,21 +173,48 @@ class DataHandler(ABC):
         """
         seed(0)
         return randint(1, 15) if (input_string == "<15" or
-                                  input_string == "NULL") or \
-                                  input_string == math.isnan(float(input_string)) \
+                                  input_string == "NULL" or
+                                  input_string == "N" or
+                                  input_string == math.isnan(float(input_string))) \
             else int(input_string.split('.')[0])
 
-    def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) -> Dict:
-        """ Returns a dictionary of top total amount of given column name via data frame.
+    def _date_validation(self, pattern: str, date: str):
+        """ Validate date as input regular expression.
+
+        Note:
+            private method which get called other methods when a date need to be validate.
+
+        Args:
+            pattern(str): regular expression pattern for testing date input.
+            date(str): inpute date string.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: wrong input pattern as date.
+
+        """
+
+        re_result = re.search(pattern, date)
+        if re_result is None:
+            self._logger.exception(f"Wrong Date Format, the format should be like: '2020-10-03'. input was: {date}")
+            raise ValueError("Wrong Date Format, the format should be like: '2020-10-03'.")
+
+    def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) \
+            -> Generator[Dict, None, None] or Generator[str, None, None]:
+        """ Returns a generator of dictionary which include top total amount of given column name via data frame.
 
         Note:
             private method which get called other methods when a string need to be converted to int before computation.
 
         Args:
             group_by_column(str): given column name for pandas series group by.
+            ascending_order(bool): result's ordering.
 
         Returns:
-            data_dict(Dict): desired data.
+            data_dict(Generator[Dict, None, None] or Generator[str, None, None]): desired data as generator or
+                "No Data" as bad result.
 
         """
 
@@ -199,20 +228,26 @@ class DataHandler(ABC):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""
 
     def _get_data_by_columns(self, columns_names: Tuple, grouped_by_column: str) -> \
-            DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]]:
-        """ Returns data by given some amount of columns of data frame.
+            Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or \
+            Generator[Tuple[str, str], None, None]:
+        """ Yields data by given amount of columns from a data frame.
 
         Note:
             private method which get called other methods for data manipulation by columns.
+
         Args:
             columns_names(Tuple): given required df's columns names as a tuple.
             grouped_by_column(str): specific column for pandas series group by operation.
 
-        Returns:
-            data_dict(DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]]): desired data.
+        Yields:
+            Tuple[str, DefaultDict[str, DefaultDict[str, int]]] or Tuple[str, str]): desired data or "No Data" as
+                bad result.
 
         """
 
@@ -229,20 +264,26 @@ class DataHandler(ABC):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""
 
-    def _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr, AnyStr, AnyStr]) -> Dict[str, Dict[str, int or float]]:
-        """ Returns statistics from data manipulation of given columns via data frame's columns.
+    def _get_statistics_by_columns_names(self, columns_names: Tuple[AnyStr, AnyStr, AnyStr]) \
+            -> Generator[Dict[str, Dict[str, int or float]], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields statistics from data manipulation of given columns via data frame columns.
 
         Note:
             private method which get called other methods for data manipulation by columns.
+
         Args:
             columns_names(Tuple): given required df's columns names as a tuple.
 
-        Returns:
-            data_dict(Dict[str, Dict[str, int or float]]): desired data.
+        Yields:
+            Tuple[str, Dict[str, int or float]] or Tuple[str, str]): desired data or "No Data" as bad result.
 
         """
+
         data_dict = None
         try:
             df = self._get_clean_copy_df_data()
@@ -260,6 +301,9 @@ class DataHandler(ABC):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""
 
 

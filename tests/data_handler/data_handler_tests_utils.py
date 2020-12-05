@@ -2,7 +2,7 @@ import unittest
 import json
 from collections import defaultdict
 from numpy import int64 as numpy_int64, float64 as numpy_float64
-from typing import Union, DefaultDict, Dict, Any
+from typing import Union, DefaultDict, Dict, Any, Generator
 
 from covid19_il.data_handler.data_handlers_factory.data_handler_factory import DataHandlerFactory
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -33,69 +33,81 @@ class DataHandlerTestsUtils(unittest.TestCase):
                                               data: DefaultDict[str, Any] or
                                                     Dict[str, Any],
                                               results: DefaultDict[str, Any] or
-                                                       Dict[str, Any]) -> None:
+                                                       Dict[str, Any]) \
+                                              -> None:
         """ Tests Dictionary with normal 1 level depth """
-        self.assertIsInstance(data, (dict, defaultdict))
-        self.assertDictEqual(data, results)
-        for key, value in data.items():
+        # Check yield type as a generator
+        self.assertIsInstance(data, type(_ for _ in range(0)))
+
+        for key, value in data:
             self.assertIsInstance(key, str)
             self.assertIsInstance(value, (int, float, str))
 
+        # Check for values equality
+        for data_value, result_value in zip(data, results.values()):
+            self.assertDictEqual(data_value, result_value)
+
     def _test_two_level_depth_nested_dictionaries(self,
-                                                  data: DefaultDict[str, DefaultDict[str, int]] or
-                                                        Dict[str, int] or
-                                                        Dict[str, Dict[str, str]],
-                                                  results: DefaultDict[str, DefaultDict[str, int] or
-                                                           Dict[str, int]] or
-                                                           Dict[str, Dict[str, str]]) -> None:
+                  data: Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or
+                        Generator[Dict[str, int], None, None] or
+                        Generator[Dict[str, Dict[str, str]], None, None],
+                  results: Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or
+                           Generator[Dict[str, int], None, None] or
+                           Generator[Dict[str, Dict[str, str]], None, None]) \
+                  -> None:
         """ Tests Nested Dictionaries with 2 level depth """
-        # check returned type
-        self.assertIsInstance(data, (defaultdict, dict))
-        for item in data.values():
-            self.assertIsInstance(item, (defaultdict, dict))
-            for key, value in item.items():
+        # Check yield type as a generator
+        self.assertIsInstance(data, type(_ for _ in range(0)))
+
+        for main_key, main_value in data:
+            self.assertIsInstance(main_key, str)
+            self.assertIsInstance(main_value, (defaultdict, dict))
+            for key, value in main_value.items():
                 self.assertIsInstance(key, str)
                 self.assertIsInstance(value, (int, float, str, numpy_int64, numpy_float64))
-        # check for values equality
-        for data_value, result_value in zip(data.values(), results.values()):
+        # Check for values equality
+        for data_value, result_value in zip(data, results.values()):
             self.assertDictEqual(data_value, result_value)
 
     def _test_three_level_depth_nested_dictionaries(self,
-                                            data: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]] or
-                                                  DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]] or
-                                                  DefaultDict[str, DefaultDict[str, Dict[str, Union[int, float, str]]]],
-                                        results: DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]] or
-                                                 DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]] or
-                                                 DefaultDict[str, DefaultDict[str, Dict[str, Union[int, float, str]]]])\
-            -> None:
+                data: Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or
+                      Generator[DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]], None, None] or
+                      Generator[DefaultDict[str, DefaultDict[str, Dict[str, Union[int, float, str]]]], None, None],
+                results: Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, int]]], None, None] or
+                         Generator[DefaultDict[str, Dict[str, Dict[str, Union[int, float]]]], None, None] or
+                         Generator[DefaultDict[str, DefaultDict[str, Dict[str, Union[int, float, str]]]], None, None])\
+                -> None:
         """ Tests Nested Dictionaries with 3 level depth """
-        # Check returned type
-        self.assertIsInstance(data, defaultdict)
-        for item in data.values():
-            self.assertIsInstance(item, (defaultdict, dict))
-            for key, value in item.items():
+        # Check yield type as a generator
+        self.assertIsInstance(data, type(_ for _ in range(0)))
+
+        for main_key, main_value in data:
+            self.assertIsInstance(main_key, str)
+            self.assertIsInstance(main_value, (defaultdict, dict))
+            for key, value in main_value.items():
                 self.assertIsInstance(key, str)
                 self.assertIsInstance(value, (defaultdict, dict))
                 for sub_key, sub_value in value.items():
                     self.assertIsInstance(sub_key, str)
                     self.assertIsInstance(sub_value, (int, str, numpy_int64, numpy_float64))
-        # check for values equality
-        for data_value, result_value in zip(data.values(), results.values()):
+        # Check for values equality
+        for data_value, result_value in zip(data, results.values()):
             self.assertDictEqual(data_value, result_value)
 
     def _test_four_level_depth_nested_dictionaries(self,
-                                        data: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]] or
-                                              DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]],
-                                        results: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]] or
-                                                 DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]],)\
+            data: Generator[DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]], None, None] or
+                  Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None],
+            results: DefaultDict[str, DefaultDict[str, DefaultDict[str, Dict[str, int]]]] or
+                     DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]],) \
             -> None:
-        """ Tests Nested Dictionaries with 3 level depth """
-        # Check returned type
-        self.assertIsInstance(data, defaultdict)
+        """ Tests Nested Dictionaries with 4 level depth """
+        # Check yield type as a generator
+        self.assertIsInstance(data, type(_ for _ in range(0)))
 
-        for item in data.values():
-            self.assertIsInstance(item, (defaultdict, dict))
-            for key, value in item.items():
+        for main_key, main_value in data:
+            self.assertIsInstance(main_key, str)
+            self.assertIsInstance(main_value, (defaultdict, dict))
+            for key, value in main_value.items():
                 self.assertIsInstance(key, str)
                 self.assertIsInstance(value, (defaultdict, dict))
                 for sub_key, sub_value in value.items():
@@ -104,6 +116,6 @@ class DataHandlerTestsUtils(unittest.TestCase):
                     for sub2_key, sub2_value in sub_value.items():
                         self.assertIsInstance(sub2_key, str)
                         self.assertIsInstance(sub2_value, (int, str))
-        # check for values equality
-        for data_value, result_value in zip(data.values(), results.values()):
+        # Check for values equality
+        for data_value, result_value in zip(data, results.values()):
             self.assertDictEqual(data_value, result_value)

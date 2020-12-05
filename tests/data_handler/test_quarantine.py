@@ -1,4 +1,4 @@
-from covid19_il.tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
+from tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
 from covid19_il.data_handler.data_handlers.quarantine import Quarantine
 from covid19_il.data_handler.enums.resource_id import ResourceId
 

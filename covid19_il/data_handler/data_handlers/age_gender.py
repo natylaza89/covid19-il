@@ -1,26 +1,25 @@
 from collections import defaultdict
 from functools import lru_cache
-from typing import Dict, DefaultDict, Tuple
+from typing import Dict, DefaultDict, Tuple, Generator
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
 
 
 class AgeGender(DataHandler):
-    """ Covid19_IL Cities Data Handler.
+    """ Covid19_IL Age Gender Data Handler.
 
     Attributes:
         None.
 
     Methods:
-        cities_by_date(self, date: str = dt.strftime(dt.now(), format="%Y-%m-%d")): return calculated dictionary of
-            city_name: namedtuple with city's data props via given date
-        statistics_by_gender(self): Returns statistic data via first week day with results which grouped by gender.
-        _get_statistics_by_columns_names(self, columns_names: Tuple): private method - Returns statistic data via first
-            week day with results which grouped by gender.
-        statistics_by_given_first_week_day(self, week_day: str): Returns statistic data by given first week day grouped
+        statistics_by_gender(self): Yields statistic data via first week day with results which grouped
+            by gender..
+        _get_statistics_by_columns_names(self, columns_names: Tuple): private method - Yields statistic data as
+            generator via first week day with results which grouped by gender.
+        statistics_by_given_first_week_day(self, week_day: str): Yields statistic data by given first week day grouped
             by gender.
-        statistics_by_age_group(self):Returns statistic of calculated fields by ordered by age group.
+        statistics_by_age_group(self): Yields statistic of calculated fields by ordered by age group.
 
     """
 
@@ -31,22 +30,26 @@ class AgeGender(DataHandler):
         super().__init__(logger, json_data)
 
     @lru_cache
-    def statistics_by_gender(self) -> DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]]:
-        """ Returns statistic data via first week day with results which grouped by gender.
+    def statistics_by_gender(self) -> \
+            Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or \
+            Generator[str, None, None]:
+        """ Yields statistic data via first week day with results which grouped by gender.
 
         Args:
             None.
 
-        Returns:
-            _(DefaultDict[str, DefaultDict[str, Dict[str, str]]]): desired data inside data holder.
+        Yields:
+            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]] or str: desired data or "No Data" as
+                bad result.
 
         """
 
         return self._get_statistics_by_columns_names(AgeGender.calculated_fields)
 
-    def _get_statistics_by_columns_names(self, columns_names: Tuple) \
-            -> DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]]:
-        """ Returns statistic data via first week day with results which grouped by gender.
+    def _get_statistics_by_columns_names(self, columns_names: Tuple) ->\
+            Generator[DefaultDict[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]], None, None] or \
+            Generator[str, None, None]:
+        """ Yields statistic data via first week day with results which grouped by gender.
 
         Note:
             private method which get called by other method for data statistic calculation.
@@ -54,8 +57,9 @@ class AgeGender(DataHandler):
         Args:
             columns_names(Tuple): required columns name of data frames for data manipulations.
 
-        Returns:
-            data dict: (DefaultDict[str, DefaultDict[str, Dict[str, Dict[int or str]]]]): desired data inside data holder.
+        Yields:
+            Tuple[str, DefaultDict[str, Dict[str, Dict[str, int or str]]]] or str: desired data or "No Data" as
+                bad result.
 
         """
 
@@ -72,17 +76,21 @@ class AgeGender(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data"
 
     @lru_cache
-    def statistics_by_given_first_week_day(self, week_day: str) -> DefaultDict[str, Dict[str, Dict[str, str]]]:
-        """ Returns statistic data by given first week day grouped by gender.
+    def statistics_by_given_first_week_day(self, week_day: str) ->\
+            Generator[DefaultDict[str, Dict[str, Dict[str, str]]], None, None] or Generator[str, None, None]:
+        """ Yields statistic data by given first week day grouped by gender.
 
         Args:
             week_day(str): given week day for data manipulation.
 
-        Returns:
-            data dict(DefaultDict[str, Dict[str, Dict[str, str]]]): desired data inside data holder.
+        Yields:
+            Tuple[str, Dict[str, Dict[str, str]] or str: desired data or "No Data" for bad result.
 
         """
 
@@ -99,18 +107,22 @@ class AgeGender(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data"
 
     @lru_cache
-    def statistics_by_age_group(self) -> DefaultDict[str, Dict[str, int or float]]:
-        """ Returns statistic of calculated fields by ordered by age group.
+    def statistics_by_age_group(self) ->\
+            Generator[DefaultDict[str, DefaultDict[str, Dict[str, int or float]]], None, None] or\
+            Generator[str, None, None]:
+        """ Yields statistic of calculated fields by ordered by age group.
 
         Args:
             None.
 
-        Returns:
-            data dict(DefaultDict[str, Dict[str, int or float]]): desired data inside data holder.
-
+        Yields:
+            Tuple[str, [DefaultDict[str, Dict[str, int or float]] or str: desired data or "No Data" for bad result.
         """
 
         data_dict = None
@@ -132,4 +144,7 @@ class AgeGender(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data"

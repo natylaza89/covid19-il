@@ -12,7 +12,7 @@ class TestDataHandlerFactory(unittest.TestCase):
         def setUp(self): announce of starting the class's tests and initialize data handler's instances
         def tearDown(self): announce of finishing the class's tests
         def get_instance(cls, required_resource_id: ResourceId, json_data: dict = None): test data handlers class
-         instance creation and memoization dictionary's behaviour as "singleton".
+            instance creation and memoization dictionary's behaviour as "singleton".
 
     """
 

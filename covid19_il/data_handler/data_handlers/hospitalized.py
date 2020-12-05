@@ -1,10 +1,9 @@
-import re
 import inspect
 from collections import defaultdict
 from functools import lru_cache
 from pandas.core.series import Series
 from pandas import DataFrame
-from typing import Tuple, Dict, DefaultDict
+from typing import Tuple, Dict, DefaultDict, Generator
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -19,8 +18,8 @@ class Hospitalized(DataHandler):
     Methods:
         _arrange_data_before_processing(self, df, method_name: str): Get df columns name list for group by then return
             a series with unique items
-        hospitalized_total_stats(self): Returns Hospitalized Total Stats data.
-        hospitalized_stats_by_date(self, date: str): Return Hospitalized statistics by given date as dictionary.
+        hospitalized_total_stats(self): Yields Hospitalized Total Stats data.
+        hospitalized_stats_by_date(self, date: str): Yields Hospitalized statistics by given date.
 
     """
 
@@ -50,14 +49,16 @@ class Hospitalized(DataHandler):
 
         return ser.unique(), df_columns
 
-    def hospitalized_total_stats(self) -> DefaultDict[str, Dict[str, float or int]]:
-        """ Returns Hospitalized Total Stats data.
+    def hospitalized_total_stats(self) -> Generator[DefaultDict[str, Dict[str, float or int]], None, None] or \
+                                          Generator[Tuple[str, str], None, None]:
+        """ Yields Hospitalized Total Stats data.
 
         Args:
             None.
 
-        Returns:
-            data_dict(DefaultDict[str, Dict[str, float or int]]): hospitalized_total_stats's data inside a data holder.
+        Yields:
+            Tuple[str, Dict[str, float or int]] or Tuple[str, str]: hospitalized_total_stats's data or "No Data" as
+                bad result.
 
         """
 
@@ -77,27 +78,31 @@ class Hospitalized(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""
 
     @lru_cache
-    def hospitalized_stats_by_date(self, date: str) -> Dict[str, float or int]:
-        """ Return Hospitalized statistics by given date as dictionary.
+    def hospitalized_stats_by_date(self, date: str) \
+            -> Generator[Dict[str, float or int or str], None, None] or Generator[Tuple[str, str], None, None]:
+        """ Yields Hospitalized statistics by given date.
 
         Args:
             date(str): required date for data processing.
 
-        Returns:
-            data_dict(Dict[str, float or int]): hospitalized_stats_by_date's data inside a data holder.
+        Yields:
+            Tuple[str, float or int or str] or Tuple[str, str]: hospitalized_stats_by_date's data or "No Data" as bad
+                result.
 
         Raises:
             ValueError: exception raises when date string isn't in a valid pattern like: "2020-10-03".
 
         """
 
-        re_result = re.search('(202[0-9])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$', date)
-        if re_result is None:
-            self._logger.exception(f"Wrong Date Format, the format should be like: '2020-10-03'. input was: {date}")
-            raise ValueError("Wrong Date Format, the format should be like: '2020-10-03'.")
+        self._date_validation(pattern='(202[0-9])-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$',
+                              date=date)
+
         data_dict = None
         try:
             date += "T00:00:00"
@@ -109,4 +114,7 @@ class Hospitalized(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""

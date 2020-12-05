@@ -1,6 +1,6 @@
 from collections import defaultdict
 
-from covid19_il.tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
+from tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
 from covid19_il.data_handler.data_handlers.age_gender import AgeGender
 from covid19_il.data_handler.enums.resource_id import ResourceId
 
@@ -10,7 +10,9 @@ class TestAgeGender(DataHandlerTestsUtils):
 
     Methods:
         setUp(self): Announce of starting the class's tests, initialize & verify Age Gender data handler's instance.
-
+        test_statistics_by_gender(self): Tests results data & type of statistics by gender.
+        test_statistics_by_given_first_week_day(self): Tests results data & type of statistics by given_first_week_day.
+        test_statistics_by_age_group(self): Tests results data & type of statistics_by_age_group.
 
     """
 
@@ -21,9 +23,8 @@ class TestAgeGender(DataHandlerTestsUtils):
                                                              resource_id_enum=ResourceId.AGE_GENDER_DATA_RESOURCE_ID)
         self._check_base_step_of_all_methods(data_handler=self.data_handler_1, class_type=AgeGender)
 
-
     def test_statistics_by_gender(self) -> None:
-        """ Tests results data & type of statistics by gender """
+        """ Tests results data & type of statistics by gender/ """
         # Get Data
         data = self.data_handler_1.statistics_by_gender()
         results = defaultdict(None,
@@ -90,7 +91,7 @@ class TestAgeGender(DataHandlerTestsUtils):
         self._test_four_level_depth_nested_dictionaries(data, results)
 
     def test_statistics_by_given_first_week_day(self) -> None:
-        """ Tests results data & type of statistics by given_first_week_day """
+        """ Tests results data & type of statistics by given_first_week_day. """
         # Get Data
         data = self.data_handler_1.statistics_by_given_first_week_day('2020-03-15')
         results = defaultdict(None,

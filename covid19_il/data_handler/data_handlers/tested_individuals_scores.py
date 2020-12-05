@@ -1,6 +1,6 @@
 from collections import defaultdict
 from functools import lru_cache
-from typing import Dict, DefaultDict
+from typing import Dict, DefaultDict, Generator, Tuple
 
 from covid19_il.logger.logger import Logger
 from covid19_il.data_handler.data_handlers.data_handler import DataHandler
@@ -13,8 +13,8 @@ class TestedIndividualsScores(DataHandler):
         None.
 
     Methods:
-        get_statistics(self): Returns statistics in gender groups with its age group amount value.
-        get_statistics_by_date(self, date_string: str): Returns data holder of statistic by given date.
+        get_statistics(self): Yields statistics in gender groups with its age group amount value.
+        get_statistics_by_date(self, date_string: str): Yields data holder of statistic by given date.
 
     """
 
@@ -22,13 +22,15 @@ class TestedIndividualsScores(DataHandler):
         """ Initialize Base Class & Instance Attributes """
         super().__init__(logger, json_data)
 
-    def get_statistics(self) -> DefaultDict[str, DefaultDict[str, int]]:
-        """ Returns statistics in gender groups with its age group amount value.
+    def get_statistics(self) -> Generator[DefaultDict[str, DefaultDict[str, int]], None, None] or \
+                                Generator[Tuple[str, str], None, None]:
+        """ Yields statistics in gender groups with its age group amount value.
+
         Args:
             None.
 
-        Returns:
-            data dict(DefaultDict[str, DefaultDict[str, int]]): desired data inside data holder.
+        Yields:
+            Tuple[str, DefaultDict[str, int]] or Tuple[str, str]: desired data or "No Data" as bad result.
 
         """
 
@@ -47,16 +49,20 @@ class TestedIndividualsScores(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""
 
-    def get_statistics_by_date(self, date_string: str) -> DefaultDict[str, Dict[str, int]]:
-        """ Returns data holder of statistic by given date.
+    def get_statistics_by_date(self, date_string: str) -> Generator[DefaultDict[str, Dict[str, int]], None, None] or \
+                                                          Generator[Tuple[str, str], None, None]:
+        """ Yields data of statistic by given date.
 
         Args:
             date_string(str): desired date as string.
 
-        Returns:
-            data_dict(DefaultDict[str, Dict[str, int]]): test results data in data holder.
+        Yields:
+            Tuple[str, Dict[str, int]] or Tuple[str, str]: desired data or "No Data" as bad result.
 
         """
 
@@ -73,4 +79,7 @@ class TestedIndividualsScores(DataHandler):
         except KeyError as ke:
             self._logger.exception(ke, "No DataFrame's key exists according to the api client's query results")
         finally:
-            return data_dict
+            if bool(data_dict):
+                yield from data_dict.items()
+            else:
+                yield "No Data", ""
