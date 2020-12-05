@@ -1,7 +1,6 @@
 from collections import defaultdict
-from numpy import int64 as numpy_int64, float64 as numpy_float64
 
-from covid19_il.tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
+from tests.data_handler.data_handler_tests_utils import DataHandlerTestsUtils
 from covid19_il.data_handler.data_handlers.cities import Cities
 from covid19_il.data_handler.enums.resource_id import ResourceId
 
@@ -26,16 +25,17 @@ class TestCities(DataHandlerTestsUtils):
 
     def test_cities_by_date(self) -> None:
         """ Tests results of tests cities by specific date and its results as city's tuples """
-        # get data from method
+        # Get Data
         data = self.data_handler_1.cities_by_date("2020-10-03")
         results = defaultdict(None, {"אבו ג'ווייעד (שבט)": Cities.city(City_name="אבו ג'ווייעד (שבט)", City_code='967', Date='2020-10-03', Cumulative_verified_cases='0', Cumulated_recovered='0', Cumulated_deaths='0', Cumulated_number_of_tests='225', Cumulated_number_of_diagnostic_tests='225'),
                                      'אבו גוש': Cities.city(City_name='אבו גוש', City_code='472', Date='2020-10-03', Cumulative_verified_cases='206', Cumulated_recovered='178', Cumulated_deaths='0', Cumulated_number_of_tests='4101', Cumulated_number_of_diagnostic_tests='3993')})
-        # check returned type
-        self.assertIs(type(data), defaultdict)
-        for item in data.values():
-            self.assertIs(type(item), Cities.city)
-        # check for values equality
-        for data_value, result_value in zip(data.values(), results.values()):
+        # Check yield type as a generator
+        self.assertIsInstance(data, type(_ for _ in range(0)))
+
+        for _, city in data:
+            self.assertIs(type(city), Cities.city)
+        # Check for values equality
+        for data_value, result_value in zip(data, results.values()):
             self.assertTupleEqual(data_value, result_value)
 
     def test_top_cases_in_cities(self) -> None:
