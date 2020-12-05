@@ -3,6 +3,8 @@ from random import randint, seed
 import math
 from collections import defaultdict
 import pandas as pd
+import re
+
 from typing import Dict, DefaultDict, Tuple, AnyStr, Generator
 
 from covid19_il.logger.logger import Logger
@@ -36,7 +38,7 @@ class DataHandler(ABC):
         self._logger = logger
         self._main_data = json_data
         self._df = self._convert_json_to_data_frame()
-        self._total_number = json_data['result']['total'] if not None else None
+        self._total_number = None
 
     def __repr__(self) -> str:
         """ Class Representation """
@@ -175,6 +177,29 @@ class DataHandler(ABC):
                                   input_string == "N" or
                                   input_string == math.isnan(float(input_string))) \
             else int(input_string.split('.')[0])
+
+    def _date_validation(self, pattern: str, date: str):
+        """ Validate date as input regular expression.
+
+        Note:
+            private method which get called other methods when a date need to be validate.
+
+        Args:
+            pattern(str): regular expression pattern for testing date input.
+            date(str): inpute date string.
+
+        Returns:
+            None
+
+        Raises:
+            ValueError: wrong input pattern as date.
+
+        """
+
+        re_result = re.search(pattern, date)
+        if re_result is None:
+            self._logger.exception(f"Wrong Date Format, the format should be like: '2020-10-03'. input was: {date}")
+            raise ValueError("Wrong Date Format, the format should be like: '2020-10-03'.")
 
     def _get_data_by_column(self, group_by_column: str, ascending_order: bool = False) \
             -> Generator[Dict, None, None] or Generator[str, None, None]:
