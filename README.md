@@ -12,6 +12,7 @@ python package which brings a "Facade" interface for using official covid19 isra
 [![PyPI Latest Release](https://img.shields.io/pypi/v/covid19-il.svg)](https://pypi.org/project/covid19-il/)
 [![Package Status](https://img.shields.io/pypi/status/pandas.svg)](https://pypi.org/project/covid19-il/)
 [![Downloads](https://img.shields.io/pypi/dm/covid19-il)](https://pepy.tech/project/covid19-il)
+[![Downloads](https://static.pepy.tech/personalized-badge/covid19-il?period=total&units=international_system&left_color=grey&right_color=orange&left_text=Downloads)](https://pepy.tech/project/covid19-il)
 [![License](https://img.shields.io/pypi/l/covid19-il.svg)](https://github.com/natylaza89/covid19_il/blob/main/LICENSE)
 </div>
 
